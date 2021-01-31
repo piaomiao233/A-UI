@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="aui.css">
+    <title>A-UI 演示站</title>
+  </head>
+  <body>
+    <div class="bgLayer"></div>
+    <div class="middleLayer">
+        <div class="app-box">
+            <div class="apps">
+                <div class="app-item" onclick="app_info(this)"><img src="imgs/app/user.png"><text>A-UI简介</text></div>
+                <div class="app-item" onclick="app_task(this)"><img src="imgs/app/task.png"><text>我的任务</text></div>
+            </div>
+        </div>
+        <div class="taskbar-box">   
+            <div id="taskbarbox"></div>
+        </div>
+        <div class="push-box">
+        </div>
+    </div>
+    <div class="topLayer">
+    </div>
+    <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="aui.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        //启动背景图片轮播
+        
+        aui.bgImage(['https://api.dujin.org/bing/1920.php'],10000)
+
+        //屏蔽鼠标右键
+        //$(document).bind("contextmenu",function(e){return false;});
+      })
+    </script>
+  </body>
+</html>

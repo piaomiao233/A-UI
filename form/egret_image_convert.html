@@ -1,0 +1,89 @@
+<div class="form-pc" style="width: 50em; height: 40em;">
+    <div class="form-title">
+        <text>白鹭图片 - 合成</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content">
+        <div class="form-panel-2" style="width: 26em;">
+            <div class="list img-list" style="height: 33em;">
+                <div class="img-list-item img-list-item-new"></div>
+            </div>
+            <div style="margin-top: .5em;color: #757575;">按住CTRL添加多张图片，仅限PNG格式。</div>
+        </div>
+        <div class="form-panel-2" style="width: 39%;">
+            <div class="form-panel-title-2">
+                文件名
+                <input id="image_name" type="text" placeholder="请输入名称" style="width: 50%; font-size: .8em; margin-left: 1em;" value=""/>
+            </div>
+            <div class="form-panel-title-2">
+                <div class="hover-tips-text" style="display: inline-block;" data-tips="系统压缩可能会失真，推荐使用PS的“导出为”进行压缩">8位PNG压缩</div>
+                <div style="display: inline-block; transform: translate(0, .3em); margin-left: 1em;">
+                    <input id="image_png8" type="checkbox">
+                </div>
+            </div>
+            <div class="form-panel-title-2">
+                <div class="hover-tips-text" style="display: inline-block;" data-tips="系统对透明区域判定系数，数值越小剪裁区域越大">图片剪裁系数</div>
+                <div style="display: inline-block; transform: translate(0, .3em); margin-left: 1em;">
+                    <input id="image_range" type="range" value="120" min="0" max="127">
+                </div>
+            </div>
+            <div class="form-panel-title-2">
+                <div class="hover-tips-text" style="display: inline-block;" data-tips="动画帧顺序与图片顺序相同">是否是动画</div>
+                <div style="display: inline-block; transform: translate(0, .3em); margin-left: 1em;">
+                    <input id="image_anime" type="checkbox">
+                </div>
+            </div>
+            <div id="anime_box" style="border: .1em solid #dadada; display: none;">
+                <div class="form-panel-title-2" style="display: none;">
+                    定位文件
+                    <input id="zip_centre" type="text" placeholder="请选择定位文件" data-tips="您可以选择打包ZIP的定位文件来为动画定位一般为Placements" style="width: 50%; font-size: .8em; margin-left: 1em;" value=""/>
+                </div>
+                <div class="form-panel-title-2">
+                    帧速度
+                    <input id="image_rate" type="text" placeholder="请输入数字" style="width: 50%; font-size: .8em; margin-left: 1em;" value="12"/>
+                </div>
+                <div class="form-panel-title-2">
+                    图片缩放比例
+                    <input id="image_zoom" type="text" placeholder="请输入数字" style="width: 50%; font-size: .8em; margin-left: 1em;" value="1"/>
+                </div>
+                <div id="ai_big_box"  style="display: none;">
+                    <div  class="form-panel-title-2">
+                        <div class="hover-tips-text" style="display: inline-block;" data-tips="AI放大拥有更好的效果，每张图片需要10金币">AI图片放大</div>
+                        <div style="display: inline-block; transform: translate(0, .3em); margin-left: 1em;">
+                            <input id="image_aibig" type="checkbox">
+                        </div>
+                    </div>
+                    <div id="noise_box" class="form-panel-title-2" style="display: none;">
+                        <div class="hover-tips-text" style="display: inline-block;" data-tips="降噪可以有效地消除锯齿">AI降噪程度</div>
+                        <div style="border: .1em dashed #d0d0d0;">
+                            <div class="radio">
+                                <input id="radio-1" type="radio" value="-1">
+                                <label for="radio-1" class="radio-label">无</label>
+                            </div>
+                            <div class="radio">
+                                <input id="radio-2" type="radio" value="0" checked>
+                                <label  for="radio-2" class="radio-label">低</label>
+                            </div>
+                            <div class="radio">
+                                <input id="radio-3" type="radio" value="1">
+                                <label  for="radio-3" class="radio-label">中</label>
+                            </div>
+                            <div class="radio">
+                                <input id="radio-4" type="radio" value="2">
+                                <label  for="radio-4" class="radio-label">高</label>
+                            </div>
+                            <div class="radio">
+                                <input id="radio-5" type="radio" value="3">
+                                <label  for="radio-5" class="radio-label">最高</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" style="margin-top: 4em;width: 7em; margin-left: 1.5em;">提交任务</button>
+        </div>
+    </div>
+</div>
