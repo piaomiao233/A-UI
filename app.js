@@ -3,10 +3,11 @@ var app_info = function(e){
         formPath: 'info',
         clickitem: $(e),
     })
-},app_form = function($e){
-
-
-
+},app_function_info = function(e){
+    new aui.form({
+        formPath: 'function',
+        clickitem: $(e),
+    })
 
 
 }

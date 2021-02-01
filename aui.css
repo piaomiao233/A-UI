@@ -39,7 +39,7 @@ menu{ display: none;}
 #taskbarbox{
   width: 100%;
   max-width: 60em;
-  background-color: rgb(99 99 99 / 0.4);
+  background-color: rgb(56 56 56 / 60%);
   height: 100%;
   text-align: center;
   margin: 0 auto;
@@ -299,6 +299,7 @@ menu{ display: none;}
 .form-pc .form-content{
   width: 100%;
   margin-top: 1em;
+  overflow-y: auto;
 }
 
 .form-pc .form-input{
