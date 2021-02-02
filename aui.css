@@ -990,3 +990,34 @@ table td {
   width: 50%;
   margin-top: 1em;
 }
+
+.form-item{
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.form-item .form-item-name{
+  letter-spacing: .3em;
+  padding: .2em;
+  text-indent: 1em;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-shadow: 0 0 1px #949494;
+  border-radius: .2em 0 0 0;
+  background-image: linear-gradient(to right, #cbd4e1 , transparent 40%);
+}
+
+.form-item .form-item-text{
+  text-indent: 1em;
+  padding: 1em;
+  font-size: 1.1em;
+  letter-spacing: .05em;
+  border-bottom: .1em solid #cecece;
+  border-left: .1em solid #cecece;
+}
+
+.form-item .form-item-btn{
+  position: absolute;
+  right: 0;
+  top: 0;
+}

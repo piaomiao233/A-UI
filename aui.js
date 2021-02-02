@@ -148,23 +148,22 @@ $(function(){
    */
   e.form = class{
     formPath;
-    form = null;
+    form;
     taskbar;
     clickitem;
     mask;
     close_func;
-    menu ;
-    parent = null;
+    parent;
     maskBlack = true;
     useMask = false;
     maskClose = false;
 
     data = {};
     _data = {};
-    icon = null;
-    mini_icon = null;
+    icon;
+    mini_icon;
     ones = true;
-    onload = null;
+    onload;
     drag = true;
     offset = 1;
     isTop = false;
@@ -224,7 +223,7 @@ $(function(){
         e.form.bind(aui.getBind('down',function(t){ t.which==1 && e.top()})),
         e.onload&&e.callOnLoad()
       };
-      e.form ? bind() : aui.http.get((e.mobile||aui.is.mobile()?'form_m/':'form/') + this.formPath + '.html', function(s){
+      e.form ? bind() : aui.http.get((e.mobile||aui.is.mobile()?'form_m/':'form/') + e.formPath, function(s){
         e.form = $(s), bind()
       }, function(){aui.tips('功能异常')})
     }
@@ -283,14 +282,14 @@ $(function(){
       },200)
       delete aui.openForms[this.formPath];
     }
-    height(){
-      return this.form.height()
+    height(e){
+      return this.form.height(e)
     }
-    width(){
-      return this.form.width()
+    width(e){
+      return this.form.width(e)
     }
-    offset(){
-      return this.form.offset()
+    offset(e){
+      return this.form.offset(e)
     }
 
   },
