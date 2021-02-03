@@ -1,12 +1,16 @@
 /*
-  AUI制作 by 飘渺 
-  aui需要jquery环境
-  github https://github.com/piaomiao233/A-UI
+  A-UI是一款基于JQuery的前端框架，整体风格模仿MacOS。
+  框架采用单页面，多内窗风格思路。
+  框架由本人业余开发，不保证更新频率。
+  制作by 飘渺
 
-  接UI定制 联系QQ283598506
+  QQ：283598506
+  微信：13014772278
+  承接JS+CSS+PHP开发
+  演示: http://www.aliong.com
+  github: https://github.com/piaomiao233/A-UI
+
 */
-
-
 $(function(){
   var e = aui = window.aui = new Object();
   e.openForms = e.forms = e.timer_list = [],
