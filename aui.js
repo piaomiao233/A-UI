@@ -139,7 +139,7 @@ $(function(){
         ones: true, //仅能开启1个(仅限formPath启动), 可用aui.getForm(formPath)进行获取
         select: true, //重定义select选项
         parent: null, //父级窗口
-        close_func: 关闭时调用函数
+        onclose: 关闭时调用函数
 
         useMask: false, //使用遮罩层
         maskClose: true, //点击遮罩层关闭窗口
@@ -152,7 +152,7 @@ $(function(){
     taskbar;
     clickitem;
     mask;
-    close_func;
+    onclose;
     parent;
     maskBlack = true;
     useMask = false;
@@ -275,7 +275,7 @@ $(function(){
       var e = this;
       e.mask&&e.mask.remove(),
       aui.array.remove(e, aui.forms),
-      e.close_func && e.close_func(),
+      e.onclose && e.onclose(e),
       e.taskbar&&e.taskbar.animate({opacity:0},'.2s',function(){e.taskbar.remove()}),
       e.form.addClass("form-close" +e.anime),setTimeout(function(){
         e.form.remove()
@@ -369,6 +369,9 @@ $(function(){
       return typeof e === 'function'
     },
     int: function(e){
+      return this.number(e)
+    },
+    number: function(e){
       return !isNaN(e)
     },
     include: function(e){ //检测文件是否被引入
@@ -441,6 +444,7 @@ $(function(){
   */
   e.dom = {
     center: function(dom,offset,back){
+      aui.is.jq(dom)||(dom=$(dom)),
       offset = aui.default(offset, 1);
       let x = ($(window).width() - 20 - dom.width()) / 2,
       y = ($(window).height() * offset - dom.height()) / 2;
@@ -448,8 +452,10 @@ $(function(){
       return {left: x, top: y}
     },
     drag: function(dom,dragDom,click,top){
+      aui.is.jq(dom)||(dom=$(dom)),
+      dragDom&&(aui.is.jq(dragDom)||(dragDom=$(dragDom))),
       top=aui.default(top, true);
-      let e = aui, win = $(window), dragTime=0,dragPos={x:0,y:0},
+      let e = aui, win = $(window), dragTime=0, dragPos = {x:0, y:0},
       Move=function(event){
         if(e.dragDom!=dom){Up();return}
         e.is.mobile()&&(event=event.changedTouches[0]);
@@ -457,7 +463,7 @@ $(function(){
         x<0 ? pos.left=0 : x+dom.width() > win.width() ? pos.left=win.width()-dom.width() : pos.left=x,
         y<0 ? pos.top=0 : y+dom.height() > win.height() ? pos.top=win.height()-dom.height() : pos.top=y,
         dom.offset(pos)
-      },Up=function(){
+      }, Up=function(){
         win.unbind(e.getBind('move', Move)).unbind(e.getBind('up', Up)),
         typeof click==="function"&&(base.time()-dragTime<200)&&click()
       }, Down = function(event){
@@ -471,6 +477,7 @@ $(function(){
       (dragDom||dom).bind(e.getBind('down', Down))
     },
     inwin: function(dom){
+      aui.is.jq(dom)||(dom=$(dom));
       let win = $(window), pos = dom.offset();
       pos.left < 0 && (pos.left = win.width()*0.05),
       pos.top < 0 && (pos.top = win.height()*0.05),
@@ -746,7 +753,20 @@ $(function(){
         success: succ,
         error: error,
       })
-    }
+    },
+    webview: function(param){
+      new aui.form({
+        formPath: 'webview.html',
+        data: param.data,
+        onclose: param.onclose,
+        onload: function(win){
+          win.find('iframe').attr('src', param.url),
+          param.name&&win.find('#form-title-text').text(param.name),
+          param.onload&&param.onload(win)
+        }
+      })
+    },
+
   },
   /*
     图标抽屉
@@ -758,22 +778,22 @@ $(function(){
     onload : 生成后调用
     formPath = 打开的窗口路径
   */
-  e.drawer = function(items, onload, formPath){
+  e.drawer = function(items, onload, form){
     let param = {
       drag: false,
       useMask: true,
       maskClose: true,
       offset: this.is.mobile() ? 0.9 : 0.8,
+      onload: onload
     };
-    formPath ? param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
-    let v = new aui.from(param),
+    form ? e.is.jq(form) ? param.form = form : param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
+    let v = new aui.form(param),
         e = v.form.find('div');
     for (const i of items) {
       let dom = $(`<div class="app-item"><img src="${i.icon}"><text>${i.name}</text></div>`);
       i.func&&(typeof i.func == 'function' ? dom.click(function(){i.func(i)}) : dom.attr("onclick", i.func)),
-      e.append(dom), dom.onClick(function(){v.close()})
+      e.append(dom), dom.click(function(){v.close()})
     }
-    onload&&onload(v)
   },
   /* 数据验证器  代码参考 https://gitee.com/nullfeng/js_validate/blob/master/src/Validate.js
 
@@ -848,60 +868,63 @@ $(function(){
     let param = {
       drag: false,
       useMask: true,
-      maskClose: true,
+      maskClose: e.default(option.maskClose, true),
+      data: option.data,
       maskBlack: option.maskBlack,
       anime: false,
-      close_func: option.close,
+      onclose: option.onclose,
       offset: option.offset || !option.event ? 1 : {left: option.event.pageX, top: option.event.pageY},
       form: $(`<div class="aui-menu" style="${option.style||''}"></div>`),
       onload: function(win){
         let item;
         for (let i of option.list) {
-          item = $(`<div class="aui-menu-item" style="${i.style||''}">${i.text}</div>`),
+          item = $(`<div class="aui-menu-item" style="${i.style||''}">${i.name}</div>`),
           i.css&&item.css(i.css),
           win.form.append(item),
           e.is.string(i.func)?(item.attr('onclick', i.func),i.func=null) :
           item.click(function(){
-            i.func&&i.func(option.data), win.close()
+            i.func&&i.func(win.data), win.close()
           })
         }
         item&&item.addClass('aui-menu-item-end'),
-        option.center ? win.center() : e.dom.inwin(win.form)
+        e.dom.inwin(win.form)
       }
     };
     return new aui.form(param);
   },
   /* 弹窗输入参数
-    items = [
-      {
-        key: key
-        name: 名称
-        rule: 验证参数
-        type: text(input[默认])/btn(button)/select/enter
-        placeholder: 提示,
-        tips: 提示
-        func: btn/enter 函数
-        select: {
-          key: name
-        }
-      }
-    ]
+    
     option = {
-      close = 点击旁边关闭
+      close = 点击旁边关闭.
+      list = [
+        {
+          key: key
+          name: 名称
+          rule: 验证参数
+          type: text(input[默认])/btn(button)/select/enter
+          placeholder: 提示,
+          tips: 提示
+          func: btn/enter 函数
+          select: {
+            key: name
+          }
+        }
+      ]
     }
   */
-  e.input_menu = function(items, option){
-    option||(option={});
+  e.input_menu = function(option){
     let rule={}, name={}, param = {
       drag: false,
       useMask: true,
-      maskClose: e.default(option.close, true),
+      maskClose: e.default(option.maskClose, true),
+      onclose: option.onclose,
+      maskBlack: option.maskBlack,
       anime: false,
       center: 0.8,
       form: $(`<div class="aui-input-menu"></div>`),
       data: {},
       onload: function(win){
-        for(const i of items){
+        for(const i of option.list){
           let s, v = $(`<div class="aui-input-item"></div>`);
           switch(i.type){
             case 'select':
@@ -1171,18 +1194,18 @@ $(function(){
           else if (e.which == 3){
             aui.menu({
               list: t.menu.concat([
-                {'text':'前移', 'func': function(){
+                {'name':'前移', 'func': function(){
                   let i = dom.index();
                   i>0 && t.dom.children(t.jq_item_new).eq(i-1).before(dom)
                 }},
-                {'text':'后移', 'func': function(){
+                {'name':'后移', 'func': function(){
                   let i = dom.index(), s = t.dom.children(t.jq_item_new);
                   i<s.length-1 && s.eq(i+1).after(dom)
                 }},
-                {'text':'删除', 'func': function(){t.del(item)}},
+                {'name':'删除', 'func': function(){t.del(item)}},
               ]),
               event: e,
-              close: function(){dom.removeClass(t._click)},
+              onclose: function(){dom.removeClass(t._click)},
               data: {
                 img_list : t,
                 item: item,
@@ -1232,10 +1255,10 @@ $(function(){
   /*  弹窗 支持2按钮
       msg : 提示文字
       param = {
-        text1 : 按钮1文字(默认确定)
-        call1 : 按钮1事件
-        text2 : 按钮2文字(默认取消)
-        call2 : 按钮2事件(留空则隐藏按钮2)
+        name1 : 按钮1文字(默认确定)
+        func1 : 按钮1事件
+        name2 : 按钮2文字(默认取消)
+        func2 : 按钮2事件(留空则隐藏按钮2)
         close : 点击旁边关闭
       }
   */
@@ -1243,14 +1266,14 @@ $(function(){
     param = aui.default(param, {});
     let dom = `<div class="msg-top"><text>${msg}</text><div class="msg-top-btns"><div class="msg-top-btn-left">`, bind = function(e){
       e.form.find('.msg-top-btn-left').click(function(){
-        param.call1&&param.call1(), e.close()
+        param.func1&&param.func1(), e.close()
       }),
-      param.call2 ? e.form.find('.msg-top-btn-right').click(function(){
-        aui.is.func(param.call2)&&param.call2(), e.close()
+      param.func2 ? e.form.find('.msg-top-btn-right').click(function(){
+        aui.is.func(param.func2)&&param.func2(), e.close()
       }) : e.form.find('.msg-top-btn-left').css('width', '100%')
     };
-    dom += (param.text1 || '确定') + '</div>',
-    param.call2 && (dom += '<div class="msg-top-btn-right">' + (param.text2 || '取消')) + '</div>',
+    dom += (param.name1 || '确定') + '</div>',
+    param.func2 && (dom += '<div class="msg-top-btn-right">' + (param.name2 || '取消')) + '</div>',
     dom += '</div></div>';
     new aui.from({
       form: $(dom),
@@ -1279,7 +1302,8 @@ $(function(){
     onclick;
     onclose;
     onload;
-    item = $(`<div class="push-item"><div class="push-img"></div><div class="push-text"></div><div class="push-close">×</div></div>`);
+    clickClose = true;
+    form = $(`<div class="push-item"><div class="push-img"></div><div class="push-text"></div><div class="push-close">×</div></div>`);
     msg;
     constructor(param){
       let t = this;
@@ -1287,33 +1311,38 @@ $(function(){
       if(aui.is.object(param))
         for (const key in param)
           t.hasOwnProperty(key) && (t[key] = param[key]);
+      e.is.string(t.form)&&(t.form=$(t.form)),
       t.icon && t.seticon(),
       t.msg && t.setmsg(),
       t.open(),
+      t.form.click(function(e){t.click(e)}),
+      t.form.find('.push-close').click(function(){t.close()}),
       e.is.number(t.closeTime) && setTimeout(function(){
-        i.close()
+        t.close()
       }, t.closeTime),
       t.onload && t.onload(t)
     }
     seticon(s){
-      this.item.find('.push-img').css('background-image', `url(${s||this.icon})`)
+      this.form.find('.push-img').css('background-image', `url(${s||this.icon})`)
     }
     setmsg(s){
-      this.item.find('.push-text').text(s||this.msg)
+      this.form.find('.push-text').text(s||this.msg)
     }
     open(){
-      $('.push-box').append(this.item).children().removeClass('push-last').last().addClass('push-last')
+      $('.push-box').append(this.form).children().removeClass('push-last').last().addClass('push-last')
     }
     click(event){
-      if(event.target==this.item){
+      if(event.target==this.form){
         onclick&&onclick(this.data),
-        this.close()
+        this.clickClose&&this.close()
       }
     }
     close(){
-      onclose&&onclose(this.data),
-      this.item.animate({opacity:0}, '.3s', function(){
-        this.item.remove()
+      let t = this;
+      onclose&&onclose(t.data),
+      t.form.animate({opacity:0}, '.3s', function(){
+        t.form.remove(),
+        $('.push-box').children().removeClass('push-last').last().addClass('push-last')
       })
     }
   }

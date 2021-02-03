@@ -39,7 +39,7 @@ menu{ display: none;}
 #taskbarbox{
   width: 100%;
   max-width: 60em;
-  background-color: rgb(56 56 56 / 60%);
+  background-color: rgba(56,56,56,.6);
   height: 100%;
   text-align: center;
   margin: 0 auto;
@@ -70,11 +70,11 @@ menu{ display: none;}
   transform: scale(0.4) translate(2.5em, -2.5em);
 }
 .taskbar-app:active,.taskbar-app:hover{
-  background-color: rgb(255 255 255 / 0.4);
+  background-color: rgba(255,255,255,.4);
   animation: icon-hover-in ease-in-out .2s !important;
 }
-@keyframes icon-hover-in{from {background-color: rgb(255 255 255 / 0);}to {background-color: rgb(255 255 255 / 0.4);}}
-@keyframes icon-hover-out{from {background-color: rgb(255 255 255 / 0.4);}to {background-color: rgb(255 255 255 / 0);}}
+@keyframes icon-hover-in{from {background-color: rgba(255,255,255,0);}to {background-color: rgba(255,255,255,0.4);}}
+@keyframes icon-hover-out{from {background-color: rgba(255,255,255,.4);}to {background-color: rgba(255,255,255,0);}}
 
 
 .app-box{
@@ -108,7 +108,7 @@ menu{ display: none;}
 
 }
 .app-item:active,.app-item:hover{
-  background-color: rgb(255 255 255 / 0.4);
+  background-color: rgba(255,255,255,.4);
   animation: icon-hover-in ease-in-out .2s !important;
 }
 
@@ -163,7 +163,7 @@ menu{ display: none;}
   .app-item text{font-size: .9em;}
   .tips-top, .loding-top{
     font-size: 1.2em;
-    background-color: rgb(0 0 0 / 85%);
+    background-color: rgba(0,0,0,.85);
   }
   
   #taskbarbox{
@@ -193,7 +193,7 @@ menu{ display: none;}
 
   .tips-top, .loding-top{
     font-size: 1.5em;
-    background-color: rgb(0 0 0 / 75%);
+    background-color: rgba(0,0,0,.75);
   }
 }
 
@@ -323,7 +323,7 @@ menu{ display: none;}
   left: 0;
 }
 .mask-black{
-  background-color: rgb(0 0 0 / 0.4);
+  background-color: rgba(0,0,0,0.4);
 }
 
 
@@ -341,7 +341,7 @@ menu{ display: none;}
   max-width: 80%;
   height: 30em;
   max-height: 70%;
-  background-color: rgb(0 0 0 / 0.8);
+  background-color: rgba(0,0,0,0.8);
   border-radius: 1.2em;
   padding: 1em;
 }
@@ -711,7 +711,7 @@ table td {
   z-index: 999;
   position: absolute;
   width: 11em;
-  background-color: rgb(230 230 230 / 95%);;
+  background-color: rgba(230,230,230,0.95);;
   border-radius: .3em;
   font-size: 1.1em;
   color: #2d2d2d;
@@ -908,12 +908,12 @@ table td {
 .push-box .push-item{
   width: 100%;
   max-width: 40em;
-  background-color: rgb(62 62 62 / 85%);
+  background-color: rgba(62,62,62,0.85);
   text-align: center;
   margin: 0 auto;
   display: block;
   height: 4em;
-  border-bottom: .1em dashed rgb(255 255 255 / 0.3);
+  border-bottom: .1em dashed rgba(255,255,255,0.3);
   animation: push-item-open-anime ease-in-out .2s;
 }
 .push-box .push-item .push-img{
@@ -932,7 +932,7 @@ table td {
   font-size: 1.6em;
   font-weight: 500;
   letter-spacing: .1em;
-  text-shadow: 1px 1px rgb(255 255 255 / 30%);
+  text-shadow: 1px 1px rgba(255,255,255,.3);
   width: 70%;
   margin-left: 1em;
   float: left;
@@ -947,7 +947,7 @@ table td {
   font-size: 3em;
   font-weight: 500;
   letter-spacing: .1em;
-  text-shadow: 1px 1px rgb(255 255 255 / 30%);
+  text-shadow: 1px 1px rgba(255,255,255,.3);
   line-height: 1.3em;
   padding-right: .3em;
 }
@@ -964,7 +964,7 @@ table td {
   width: 25em;
   max-height: 80%;
   padding: 1.5em;
-  background-color: rgb(224 224 224 / 80%);
+  background-color: rgb(224, 224, 224, .8);
   border-radius: 1em;
   box-shadow: 0 0 0.1em 0.1em #3a3a3a;
 }
