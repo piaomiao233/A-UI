@@ -1,0 +1,168 @@
+<div class="form-pc" style="width: 40em; height: 30em;">
+    <div class="form-title">
+        <text>其他功能</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;height: 28em;">
+        <div class="form-item">
+            <div class="form-item-name">
+                背景轮播
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let imgs = [
+                    'https://api.dujin.org/bing/1920.php'
+                ];
+                aui.bgImage(imgs, time)
+                <br><br>
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>imgs</td>
+                        <td>array</td>
+                        <td>*</td>
+                        <td>图片URL数组</td>
+                    </tr>
+                    <tr>
+                        <td>time</td>
+                        <td>int</td>
+                        <td>30000</td>
+                        <td>切换时间(毫秒)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                定时器组件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>aui.timer.start()</td>
+                        <td>启动定时器</td>
+                    </tr>
+                    <tr>
+                        <td>aui.timer.add(func, loop, next)</td>
+                        <td>
+                            添加定时器
+                            <br>loop = 定时器间隔(秒)
+                            <br>next = 下次执行时间(默认为当前时间+间隔时间)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>aui.timer.del(func)</td>
+                        <td>删除定时器</td>
+                    </tr>
+                    <tr>
+                        <td>aui.timer.clear()</td>
+                        <td>清空定时器</td>
+                    </tr>
+                    <tr>
+                        <td>aui.timer.stop()</td>
+                        <td>停止定时器</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                COOKIE组件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>aui.cookie.set(key, val, day)</td>
+                        <td>
+                            设置cookie
+                            <br> key = 键
+                            <br> val = 值
+                            <br> day = 保存天数
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>aui.cookie.get(key)</td>
+                        <td>获取cookie</td>
+                    </tr>
+                    <tr>
+                        <td>aui.cookie.del(key)</td>
+                        <td>删除cookie</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                数组组件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>aui.array.remove(item, array)</td>
+                        <td>数组删除第一个匹配元素</td>
+                    </tr>
+                    <tr>
+                        <td>aui.array.isIn(item, array)</td>
+                        <td>检测数组是否包含项</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                字符串组件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.trim(str)</td>
+                        <td>清除首尾的特殊字符</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.copy(str)</td>
+                        <td>复制到剪贴板</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.low(str)</td>
+                        <td>字符串转小写</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.upp(str)</td>
+                        <td>字符串转大写</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.isIn('a', str)</td>
+                        <td>字符串是否包含指定字符</td>
+                    </tr>
+                    <tr>
+                        <td>aui.string.pos('a', str)</td>
+                        <td>指定字符在字符串中的位置</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

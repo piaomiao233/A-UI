@@ -89,4 +89,19 @@ var app_info = function(e){
             })
         }
     })
+}, app_file = function(e){
+    new aui.form({
+        formPath: 'file.html',
+        clickitem: e&&$(e),
+    })
+}, app_validate = function(e){
+    new aui.form({
+        formPath: 'validate.html',
+        clickitem: e&&$(e),
+    })
+}, app_other = function(e){
+    new aui.form({
+        formPath: 'other.html',
+        clickitem: e&&$(e),
+    })
 }

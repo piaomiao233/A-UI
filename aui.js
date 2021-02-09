@@ -13,7 +13,7 @@
 */
 $(function(){
   var e = aui = window.aui = new Object();
-  e.openForms = e.forms = e.timer_list = [],
+  e.openForms = e.forms = [],
   e.onload = function(){
   /* 给数组加入remove功能  可能与其他框架产生冲突
     Array.prototype.remove = function(val) {
@@ -55,37 +55,37 @@ $(function(){
   },
   e.timer = {
     start: function(){
-      e.timer_id || (e.timer_id = setInterval(e.timer.loop, 1000))
+      e.timer.timer_id || (e.timer.timer_id = setInterval(e.timer.loop, 1000))
     },
     stop: function(clear){
-      clearInterval(e.timer_id),
+      clearInterval(e.timer.timer_id),
       clear&&this.clear()
     },
     clear: function(){
-      aui.timer_list = []
+      e.timer.timer_list = []
     },
     loop: function(){
-      let time = e.time(), l = e.timer_list;
-      for (let i=l.length-1;i>=0;i--) {
+      let time = e.time(), l = e.timer.timer_list;
+      for (let i=l.length-1; i>=0; i--) {
         let v = l[i];
-        v.next>=time && (v.func(), v.loop? v.next=time+v.loop:this.del(v))
+        v.next>=time && (v.func(), v.loop ? v.next = time + v.loop:this.del(v))
       }
     },
     add: function(func, loop, next){
       next=aui.default(next, -1);
-      next<0 ? next=e.time()+loop : next<e.time() && (next=e.time()+next),
-      e.timer_list.push({
+      next<0 ? next = e.time() + loop : next<e.time() && (next=e.time()+next),
+      e.timer.timer_list.push({
           next: next,
           func: func,
           loop: loop
       })
     },
     del: function(func){
-      let l = aui.timer_list;
+      let l = e.timer.timer_list;
       for (let i=l.length-1;i>=0;i--)
         func == l[i].func && l.splice(i, 1)
-    }
-
+    },
+    timer_list: [],
   },
   //背景图片轮播
   e.bgImage = function (images ,time){
@@ -448,7 +448,6 @@ $(function(){
     jQuery: function(t){
       return this.jq(t)
     }
-
   },
   /* 动态引入js或css
       src = 路径
@@ -635,7 +634,10 @@ $(function(){
           return unescape(arr[2]);
       else
           return null;
-    }
+    },
+    del: function(key){
+      e.cookie.set(key, '', -1)
+    },
   },
   /* 文件类
     read = 读取本地文件
@@ -703,8 +705,10 @@ $(function(){
       return i>-1 ? aui.string.low(path.substr(i+1)) : null
     },
     getName: function(path){
-      let i = path.lastIndexOf(".");
-      return i>-1 ? path.substr(0, i) : null
+      let i = path.lastIndexOf("."),
+      s = path.lastIndexOf("/");
+      s<0 ? (s=0) : (s+=1);
+      return i>-1 ? path.substr(s, i) : path.substr(s)
     },
     excludeEx: function(arr, ex){
       let list=[], low = aui.string.low;
@@ -742,7 +746,6 @@ $(function(){
           console.log(e.message)
       }
     }
-
   },
   /* 给JQ的$.get,$.post加了个error
   */
