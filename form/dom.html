@@ -1,0 +1,96 @@
+<div class="form-pc" style="width: 40em; height: 30em;">
+    <div class="form-title">
+        <text>DOM模块介绍</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;height: 28em;">
+        <div class="form-item">
+            <div class="form-item-name">
+                窗口居中
+            </div>
+            <div class="form-item-text">
+                aui.dom.center(dom, offset, back)
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>dom</td>
+                        <td>JQ对象</td>
+                        <td></td>
+                        <td>窗体对象</td>
+                    </tr>
+                    <tr>
+                        <td>offset</td>
+                        <td>float</td>
+                        <td>1</td>
+                        <td>垂直居中比例</td>
+                    </tr>
+                    <tr>
+                        <td>back</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>不居中,但是返回居中坐标</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+            <div class="form-item">
+                <div class="form-item-name">
+                    窗口拖动
+                </div>
+                <div class="form-item-text">
+                    aui.dom.drag(dom,dragDom,click,top)
+                    <table border="1">
+                        <tr>
+                            <td>键</td>
+                            <td>类型</td>
+                            <td>默认</td>
+                            <td>注释</td>
+                        </tr>
+                        <tr>
+                            <td>dom</td>
+                            <td>JQ对象</td>
+                            <td></td>
+                            <td>窗体对象</td>
+                        </tr>
+                        <tr>
+                            <td>dragDom</td>
+                            <td>JQ对象</td>
+                            <td></td>
+                            <td>拖动触发区域，留空则全窗体触发拖动</td>
+                        </tr>
+                        <tr>
+                            <td>click</td>
+                            <td>function</td>
+                            <td></td>
+                            <td>点击窗体时触发</td>
+                        </tr>
+                        <tr>
+                            <td>top</td>
+                            <td>bool</td>
+                            <td>true</td>
+                            <td>拖动时置顶</td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                窗口移动到可视区域内
+            </div>
+            <div class="form-item-text">
+                aui.dom.inwin(dom)
+                <br>从左上角开始顺时针判定，如果超出边界则移动到窗口内
+            </div>
+        </div>
+
+
+    </div>
+</div>

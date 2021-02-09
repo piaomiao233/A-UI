@@ -33,6 +33,26 @@ $(function(){
       del = 删除定时
           func = 方法
   */
+  e.post_message = {
+    init: function(){
+      addEventListener('message', function(e){
+        e.post_message.receive(e)
+      })
+    },
+    add: function(key, func){
+      this.list[key] = func
+    },
+    remove: function(key, func){
+      
+      this.list.splice(i,1)
+
+    },
+
+    receive: function(t){
+
+    },
+    list: {},
+  },
   e.timer = {
     start: function(){
       e.timer_id || (e.timer_id = setInterval(e.timer.loop, 1000))
@@ -51,7 +71,7 @@ $(function(){
         v.next>=time && (v.func(), v.loop? v.next=time+v.loop:this.del(v))
       }
     },
-    add: function(func, loop, next=-1){
+    add: function(func, loop, next){
       next=aui.default(next, -1);
       next<0 ? next=e.time()+loop : next<e.time() && (next=e.time()+next),
       e.timer_list.push({
@@ -198,7 +218,7 @@ $(function(){
     //打开窗口
     open(){
       var e = this, bind = function(){
-        let down = aui.getBind('down',function(){return aui.is.mobile()});
+        let down = aui.bind('down',function(){return aui.is.mobile()});
         e.ones&&(aui.openForms[e.formPath] = e),
         aui.forms.push(e),
         e.anime = e.anime?'-anime':'',
@@ -224,7 +244,7 @@ $(function(){
         e.tips&&aui.html.hover_tips(e.form),
         e.range&&aui.html.range(e.form),
         e.menu&&aui.html.menu(e),
-        e.form.bind(aui.getBind('down',function(t){ t.which==1 && e.top()})),
+        e.form.bind(aui.bind('down',function(t){ t.which==1 && e.top()})),
         e.onload&&e.callOnLoad()
       };
       e.form ? bind() : aui.http.get((e.mobile||aui.is.mobile()?'form_m/':'form/') + e.formPath, function(s){
@@ -259,15 +279,38 @@ $(function(){
     }
     //添加状态栏图标
     addTaskbar(){
-      var e = this;
-      e.taskbar = $('<div class="taskbar-app"></div>');
-      $("#taskbarbox").append(e.taskbar),
-      e.taskbar.append(this.clickitem.find('img').clone()),
-      e.mini_icon&&e.taskbar.append($(`<img class="mini-icon" src="${e.mini_icon}">`)),
-      e.icon&&e.taskbar.find('img').attr('src', e.icon);
-      e.taskbar.click(function(){
+      let e = this, clone, s = e.taskbar = $('<div class="taskbar-app"></div>');
+      $("#taskbarbox").append(s),
+      s.append(this.clickitem.find('img').clone()),
+      e.mini_icon&&s.append($(`<img class="mini-icon" src="${e.mini_icon}">`)),
+      e.icon&&s.find('img').attr('src', e.icon),
+      s.click(function(){
         !e.isTop || e.form.hasClass("form-close"+e.anime)? e.show() : e.mini()
       })
+      /*
+      let p = s.offset(), wh = $(window).height() * 0.15, pos, down = function(event){
+        event.preventDefault(),
+        aui.is.mobile()&&(event=event.changedTouches[0]),
+        pos = {x: event.clientX - p.left, y:event.clientY - p.top},
+        aui.dragDom = clone = s.css('opacity', 0).clone().css({opacity: 1, position: 'absolute'}).offset(p),
+        $("#taskbarbox").append(clone)
+        aui.bind('move', move, clone)
+        aui.bind('up', up, clone)
+      }, move = function(event){
+        event.preventDefault();
+        if(aui.dragDom!=clone){up();return}
+        aui.is.mobile()&&(event=event.changedTouches[0]);
+        let h = p.top - clone.offset().top, _h = event.clientY + p.top;
+        clone.offset({left: p.left, top: _h})
+        //h>0 && clone.offset({left: p.left, top: _h})
+        //clone.css('opacity', 1-(h/wh))
+      }, up = function(event){
+        event.preventDefault(),
+        aui.dragDom = null
+        //clone.remove(), s.css('opacity', 1)
+      };
+      aui.bind('down', down, s)
+      */
     }
     //窗口置顶
     top(){
@@ -330,7 +373,7 @@ $(function(){
    */
   e.is = {
     url: function(e){
-      return typeof e!='string' && (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/i.test(e))
+      return this.is.string(e) && (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/i.test(e))
     },
     mobile: function(){
       return (/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent))
@@ -411,7 +454,7 @@ $(function(){
       src = 路径
       onload = 引入后调用
   */
-  e.getBind = function(type, func){
+  e.bind = function(type, func, dom){
     type = e.string.low(type);
     let t = {};
     if(e.string.isIn('down', type))
@@ -422,6 +465,7 @@ $(function(){
       t.touchmove = t.mousemove = func;
     if(e.string.isIn('click', type))
       t.click = t.touchstart = func;
+    dom&&dom.bind(t);
     return t
   },
   e.include = function(src, onload = null){
@@ -468,17 +512,17 @@ $(function(){
         y<0 ? pos.top=0 : y+dom.height() > win.height() ? pos.top=win.height()-dom.height() : pos.top=y,
         dom.offset(pos)
       }, Up=function(){
-        win.unbind(e.getBind('move', Move)).unbind(e.getBind('up', Up)),
+        win.unbind(e.bind('move', Move)).unbind(e.bind('up', Up)),
         typeof click==="function"&&(base.time()-dragTime<200)&&click()
       }, Down = function(event){
         e.dragDom=dom,
         e.is.mobile()&&(event=event.changedTouches[0]);
-        win.bind(e.getBind('move', Move)).bind(e.getBind('up', Up)),
+        win.bind(e.bind('move', Move)).bind(e.bind('up', Up)),
         dragTime=e.time(),
         dragPos={x:event.clientX-dom.offset().left,y:event.clientY-dom.offset().top},
         top&&dom.parent().append(dom)
       };
-      (dragDom||dom).bind(e.getBind('down', Down))
+      (dragDom||dom).bind(e.bind('down', Down))
     },
     inwin: function(dom){
       aui.is.jq(dom)||(dom=$(dom));
@@ -1008,7 +1052,7 @@ $(function(){
             null
           )
           list.push({
-            text: item.attr('name'),
+            name: item.attr('name'),
             style: item.attr('style'),
             func: func,
           })
@@ -1035,10 +1079,10 @@ $(function(){
         window.close();
       }
     },
-    select: function(e, size){
-      size||(size=7),
-      e = (e.form||e).find("select"),
-      e.each(function(){
+    select: function(form, size){
+      size = e.default(size, 7),
+      form = (form.form||form).find("select"),
+      form.each(function(){
         let e = $(this), c, l, v, mask = $('<div class="mask"></div>'), end = function(){
           c.remove(),c=null,e.attr("disabled","true"),e.attr("disabled",null),mask.remove()
         }, hide = (e.find(":first").is(":visible") || e.find(":first").css('display') == 'none');
@@ -1048,17 +1092,19 @@ $(function(){
             v = e.find("option"),
             l = v.length-(hide?1:0);
             if(l>1){
-              c = e.clone().css('position','absolute'),pos = e.position();
+              c = e.clone().css('position','absolute'), pos = e.offset();
               (hide ? c.find(":not(:first)") : c.children()).show(),
               c.find(":last").css('border-bottom','unset'),
               c.get(0).selectedIndex = e.get(0).selectedIndex,
-              e.parent().append(mask).append(c), c.attr('size',size),
-              c.css({ height: e.height() * (l>size ? size : l), left: pos.left, top: pos.top + e.height() +3}),c.width(e.width()),
+              $('body').append(mask).append(c), c.attr('size', size),
+              c.height( e.height() * (l>size ? size : l)),
+              c.width(e.width()),
+              c.css({left: pos.left, top: pos.top + e.height() +3}),
               e.attr("disabled","true"),e.attr("disabled",null),
-              c.onchange(function(){
+              c.change(function(){
                 e.get(0).selectedIndex = c.get(0).selectedIndex,end(),e.trigger("change")
               }),
-              mask.onmousedown(end)
+              mask.click(end)
             }
           }
         })
@@ -1097,25 +1143,25 @@ $(function(){
         v && v.animate({opacity:0},'.3s',function(){
           v.remove(), v = null
         })
-      }).bind(aui.getBind('move',function(e){
+      }).bind(aui.bind('move',function(e){
         v && v.offset({left: e.pageX, top: e.pageY+10})
       }))
     },
     range: function(form){
       form.find('input[type=range]').each(function(){
         let v, s = $(this);
-        s.bind(aui.getBind('down',function(e){
+        s.bind(aui.bind('down',function(e){
           v = $(`<div class="range-hover">${s.val()}</div>`),
           $('body').append(v),
           v.animate({opacity:1}, '.3s'),
           v.offset({left: e.pageX - v.width() / 2, top: s.offset().top - v.height() - 5})
-        })).bind(aui.getBind('move',function(e){
+        })).bind(aui.bind('move',function(e){
           v && (
             e.pageX > s.offset().left+5 && e.pageX < s.offset().left + s.width()-5 &&
             v.offset({left: e.pageX - v.width() / 2, top: s.offset().top - v.height() - 5}),
             v.text(s.val())
           )
-        })).bind(aui.getBind('up',function(e){
+        })).bind(aui.bind('up',function(e){
           v && v.animate({opacity:0},'.3s',function(){
             v.remove(), v = null
           })
@@ -1160,7 +1206,7 @@ $(function(){
         aui.file.select(function(list){
           list = aui.file.excludeEx(list, t.ex);
           if(list.length<1){
-            aui.tips('请选择PNG图片');
+            aui.tips(`请选择${t.ex}图片`);
             return
           };
           for (const i in list){
@@ -1218,14 +1264,14 @@ $(function(){
             for (const i of t._imgs)
               item==i?i.dom.addClass(t._click) :i.dom.removeClass(t._click);
           }else if(e.which == 1){
-            clone = dom.css('opacity',0).clone().css('opacity', 0.6).offset({left: e.pageX-dom.width()/2, top:e.pageY-dom.height()/2}),
-            win.bind(aui.getBind('up', up)).bind(aui.getBind('move', move)),
+            clone = dom.css('opacity',0).clone().css({opacity: 0.6, position: 'absolute'}).offset({left: e.pageX-dom.width()/2, top:e.pageY-dom.height()/2}),
+            win.bind(aui.bind('up', up)).bind(aui.bind('move', move)),
             t.dom.append(clone)
           }
         }, up = function(){
           dom.css('opacity',1),
           clone&&clone.remove(),
-          win.unbind(aui.getBind('up', up)).unbind(aui.getBind('move', move));
+          win.unbind(aui.bind('up', up)).unbind(aui.bind('move', move));
         }, move = function(e){
           let p = t.dom.offset();
           e.pageX > p.left && e.pageY > p.top && e.pageX < p.left + t.dom.width() && e.pageY < p.top + t.dom.height() &&
@@ -1243,7 +1289,7 @@ $(function(){
             }
           }
         };
-        dom.bind(aui.getBind('down', down))
+        dom.bind(aui.bind('down', down))
            .bind("contextmenu",function(e){ if(e && e.target == this) return false})
       }
       get(){

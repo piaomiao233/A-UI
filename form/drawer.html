@@ -1,0 +1,74 @@
+<div class="form-pc" style="width: 40em; height: 30em;">
+    <div class="form-title">
+        <text>图标抽屉</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;height: 28em;">
+        <div class="form-item">
+            <div class="form-item-name">
+                参数
+            </div>
+            <div class="form-item-text">
+                aui.drawer(items, onload, formPath)
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>items</td>
+                        <td>array</td>
+                        <td>*</td>
+                        <td>图标组{name: 名称, icon:图标, func: 事件}</td>
+                    </tr>
+                    <tr>
+                        <td>onload</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>启动后调用(返回form类)</td>
+                    </tr>
+                    <tr>
+                        <td>form</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>自定义链接或JQ对象</td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                演示
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+            aui.drawer([
+                <br>&emsp;{name: '窗体模块', icon:'', func:function(){
+                <br>&emsp;&emsp;new aui.form({
+                <br>&emsp;&emsp;&emsp;formPath: 'form.html',
+                <br>&emsp;&emsp;&emsp;clickitem: e&&$(e),
+                <br>&emsp;&emsp;})
+                <br>&emsp;}},
+                <br>&emsp;{name: 'DOM模块', icon:'', func:function(){
+                <br>&emsp;&emsp;new aui.form({
+                <br>&emsp;&emsp;&emsp;formPath: 'dom.html',
+                <br>&emsp;&emsp;&emsp;clickitem: e&&$(e),
+                <br>&emsp;&emsp;})
+                <br>&emsp;}},
+                <br>&emsp;{name: '图标抽屉', icon:'', func:function(){
+                <br>&emsp;&emsp;new aui.form({
+                <br>&emsp;&emsp;&emsp;formPath: 'drawer.html',
+                <br>&emsp;&emsp;&emsp;clickitem: e&&$(e),
+                <br>&emsp;&emsp;})
+                <br>&emsp;}},
+            <br>])
+            </div>
+        </div>
+
+
+    </div>
+</div>

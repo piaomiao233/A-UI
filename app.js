@@ -67,4 +67,26 @@ var app_info = function(e){
 
         }
     })
+}, app_html = function(e){
+    new aui.form({
+        formPath: 'html.html',
+        clickitem: e&&$(e),
+        onload: function(win){
+            win.find('#image-list-example').click(function(){
+                new aui.form({
+                    formPath: 'img-list.html',
+                    onload: function(win){
+                        let img_list = new aui.html.img_list(win.find('.img-list'));
+                        win.find('#image-list-show').click(function(){
+                            let size = 0, num = 0;
+                            aui.for(img_list.get(), function(k, v){
+                                size += v.data.length, num++;
+                            }),
+                            aui.tips(`您选择了${num}张图片,总大小${size}`)
+                        })
+                    }
+                })
+            })
+        }
+    })
 }

@@ -1,0 +1,151 @@
+<div class="form-pc" style="width: 40em; height: 30em;">
+    <div class="form-title">
+        <text>HTML组件</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;height: 28em;">
+        <div class="form-item">
+            <div class="form-item-name">
+                下拉菜单
+            </div>
+            <div class="form-item-text">
+                aui.html.select(form, size)
+                <br>遍历搜索JQ对象的子物体$('select')组件并美化，更好的显示更多的项。
+                <br>采用克隆原有组件的方法，闪烁问题暂无法解决。
+                <br>
+                <select>   
+                    <option>选项1</option>
+                    <option>选项2</option>
+                    <option>选项3</option>
+                    <option>选项4</option>
+                </select>
+                <select>   
+                    <option>选项1</option>
+                    <option>选项2</option>
+                    <option>选项3</option>
+                    <option>选项4</option>
+                    <option>选项5</option>
+                    <option>选项6</option>
+                    <option>选项7</option>
+                    <option>选项8</option>
+                    <option>选项9</option>
+                    <option>选项10</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                开关
+            </div>
+            <div class="form-item-text">
+                aui.html.checkbox(form)
+                <br>遍历搜索JQ对象的子物体$('input[type=checkbox]')组件并美化。
+                <br><input type="checkbox">
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                拖动条
+            </div>
+            <div class="form-item-text">
+                aui.html.range(form)
+                <br>遍历搜索JQ对象的子物体$('input[type=range]')组件并美化。
+                <br><input type="range" value="50" min="0" max="100">
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                提示组件
+            </div>
+            <div class="form-item-text">
+                aui.html.hover_tips(form)
+                <br>遍历搜索JQ对象的子物体$('[class^=hover-tips]')。
+                <br><div class="hover-tips-text" data-tips="提示信息">添加class="hover-tips-text" data-tips="提示信息"</div>
+                <br>自动识别所有以hover-tips开头的class，其中hover-tips-text为下划线效果
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                图片集组件
+            </div>
+            <div class="form-item-text">
+                <br>&lt;div id=&quot;img_list&quot; class=&quot;list img-list&quot; style=&quot;height: 33em;&quot;&gt;
+                <br>&emsp;&lt;div class=&quot;img-list-item img-list-item-new&quot;&gt;&lt;/div&gt;
+                <br>&lt;/div&gt;
+                <br>
+                <br>var param = {
+                <br>&emsp;ex = 'png,jpg',
+                <br>&emsp;onload = function,
+                <br>};
+                <br>var img_list = aui.html.img_list($('#img_list'), param)
+                <br><br>
+                <button id="image-list-example">演示</button>
+                <br><br>
+                <br>附加参数
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>ex</td>
+                        <td>string</td>
+                        <td>'png,jpg'</td>
+                        <td>图片过滤的后缀名</td>
+                    </tr>
+                    <tr>
+                        <td>img_name</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>是否允许编辑文件名</td>
+                    </tr>
+                    <tr>
+                        <td>menu</td>
+                        <td>array</td>
+                        <td></td>
+                        <td>额外右键菜单, 与menu参数相同</td>
+                    </tr>
+                    <tr>
+                        <td>onload</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>启动事件</td>
+                    </tr>
+                </table>
+                <br>调用方法
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>img_list.count()</td>
+                        <td>获取图片数量</td>
+                    </tr>
+                    <tr>
+                        <td>img_list.clear()</td>
+                        <td>清空图片</td>
+                    </tr>
+                    <tr>
+                        <td>img_list.add()</td>
+                        <td>选择添加新图片</td>
+                    </tr>
+                    <tr>
+                        <td>img_list.get()</td>
+                        <td>获取根据图片顺序的数据<br>
+                            {data: base64编码的图片, name: 图片名称, id: 编号, ex: 文件后缀, param: 额外数据}
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

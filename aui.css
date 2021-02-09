@@ -68,6 +68,7 @@ menu{ display: none;}
   width: auto;
   margin: auto;
   align-self: center;
+  user-select: none;
 }
 .taskbar-app .mini-icon{
   position: absolute;
@@ -1012,7 +1013,6 @@ table td {
 }
 
 .form-item .form-item-text{
-  text-indent: 1em;
   padding: 1em;
   font-size: 1.1em;
   letter-spacing: .05em;

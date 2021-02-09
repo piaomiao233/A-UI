@@ -1,0 +1,163 @@
+<div class="form-pc" style="width: 40em; height: 30em;">
+    <div class="form-title">
+        <text>消息类</text>
+        <div class="form-btns">
+            <div class="form-btn form-btn-close" title="关闭">×</div>
+            <div class="form-btn form-btn-mini" title="最小化">－</div>
+        </div>
+    </div>
+    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;height: 28em;">
+        <div class="form-item">
+            <div class="form-item-name">
+                自动消失提示框
+            </div>
+            <div class="form-item-text">
+                <button id="tips-example">演示</button>
+                <br><br>aui.tips(msg, time, func)
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>msg</td>
+                        <td>string</td>
+                        <td>*</td>
+                        <td>提示信息</td>
+                    </tr>
+                    <tr>
+                        <td>time</td>
+                        <td>int</td>
+                        <td>3000</td>
+                        <td>消失时间(毫秒)</td>
+                    </tr>
+                    <tr>
+                        <td>func</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>消失时触发</td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                弹窗
+            </div>
+            <div class="form-item-text">
+                <button id="message-example">演示</button>
+                <br><br>aui.message(msg, param)
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>msg</td>
+                        <td>string</td>
+                        <td>*</td>
+                        <td>提示信息</td>
+                    </tr>
+                    <tr>
+                        <td>param</td>
+                        <td>object</td>
+                        <td></td>
+                        <td>额外参数</td>
+                    </tr>
+                    <tr>
+                        <td>param.name1</td>
+                        <td>string</td>
+                        <td>确定</td>
+                        <td>按钮1文字</td>
+                    </tr>
+                    <tr>
+                        <td>param.func1</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>按钮1事件</td>
+                    </tr>
+                    <tr>
+                        <td>param.name2</td>
+                        <td>string</td>
+                        <td>返回</td>
+                        <td>按钮2文字</td>
+                    </tr>
+                    <tr>
+                        <td>param.func2</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>按钮2事件(默认不显示,需要显示请定义true或事件)</td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                模仿移动端推送
+            </div>
+            <div class="form-item-text">
+                <button id="push-example1">演示1</button>&emsp;<button id="push-example2">演示2</button>
+                <br><br>var param = {
+                <br>&emsp;onclick: function;
+                <br>&emsp;msg: '信息';
+                <br>};
+                <br>var form = aui.push(param);
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>msg</td>
+                        <td>string</td>
+                        <td>*</td>
+                        <td>提示信息</td>
+                    </tr>
+                    <tr>
+                        <td>icon</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>图标链接</td>
+                    </tr>
+                    <tr>
+                        <td>closeTime</td>
+                        <td>int</td>
+                        <td></td>
+                        <td>自动关闭时间(毫秒)</td>
+                    </tr>
+                    <tr>
+                        <td>onclick</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>点击事件</td>
+                    </tr>
+                    <tr>
+                        <td>onclose</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>关闭事件</td>
+                    </tr>
+                    <tr>
+                        <td>clickClose</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>点击后关闭</td>
+                    </tr>
+                    <tr>
+                        <td>onload</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>启动事件</td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+
+    </div>
+</div>
