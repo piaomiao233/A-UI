@@ -192,6 +192,7 @@ $(function(){
     offset = 1;
     isTop = false;
     anime = true;
+    _center = false;
     //-----以下为html组件绑定------
     select = true;
     checkbox = true;
@@ -238,7 +239,7 @@ $(function(){
           e.form.addClass("form-close" + e.anime)
         }).bind(down);
         !aui.is.mobile() && e.drag && aui.dom.drag(e.form,e.form.find(".form-title"),null,false),
-        e.offset && aui.is.object(e.offset) ? e.form.offset(e.offset) : !aui.is.mobile() && aui.dom.center(e.form, e.offset),
+        !aui.is.undefined(e.offset)&&(aui.is.object(e.offset) ? e.form.offset(e.offset) : (!aui.is.mobile()||e._center) && e.center(e.offset)),
         e.select&&aui.html.select(e.form),
         e.checkbox&&aui.html.checkbox(e.form),
         e.tips&&aui.html.hover_tips(e.form),
@@ -505,7 +506,7 @@ $(function(){
       let e = aui, win = $(window), dragTime=0, dragPos = {x:0, y:0},
       Move=function(event){
         if(e.dragDom!=dom){Up();return}
-        e.is.mobile()&&(event=event.changedTouches[0]);
+        event=e.get.touche(event);
         let x=event.clientX-dragPos.x, y=event.clientY-dragPos.y, pos=dom.offset();
         x<0 ? pos.left=0 : x+dom.width() > win.width() ? pos.left=win.width()-dom.width() : pos.left=x,
         y<0 ? pos.top=0 : y+dom.height() > win.height() ? pos.top=win.height()-dom.height() : pos.top=y,
@@ -515,7 +516,7 @@ $(function(){
         typeof click==="function"&&(base.time()-dragTime<200)&&click()
       }, Down = function(event){
         e.dragDom=dom,
-        e.is.mobile()&&(event=event.changedTouches[0]);
+        event=e.get.touche(event);
         win.bind(e.bind('move', Move)).bind(e.bind('up', Up)),
         dragTime=e.time(),
         dragPos={x:event.clientX-dom.offset().left,y:event.clientY-dom.offset().top},
@@ -569,7 +570,13 @@ $(function(){
         return JSON.stringify(t);
       else
         return console.log('不是object对象', t), null
-    }
+    },
+    touche: function(t){
+      e.is.mobile()&&(
+        t = t.changedTouches ? t.changedTouches[0] : t.originalEvent.changedTouches[0]
+        );
+      return t
+    },
     
   },
   /* 设置默认值
@@ -834,7 +841,8 @@ $(function(){
       drag: false,
       useMask: true,
       maskClose: true,
-      offset: this.is.mobile() ? 0.9 : 0.8,
+      _center: true,
+      offset: aui.is.mobile() ? 0.9 : 0.8,
       onload: onload
     };
     form ? e.is.jq(form) ? param.form = form : param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
@@ -1129,9 +1137,12 @@ $(function(){
       })
     },
     hover_tips: function(form, showVal){
-      if(aui.is.mobile())
+      if(e.is.mobile())
         return form.find('[class^=hover-tips]').each(function(){
-          aui.tips($(this).attr('data-tips'))
+          let s = $(this);
+          s.click(function(){
+            aui.tips(s.attr('data-tips'), 1000)
+          })
         });
       let v;
       form.find('[class^=hover-tips]').hover( function(e){
@@ -1154,12 +1165,14 @@ $(function(){
       form.find('input[type=range]').each(function(){
         let v, s = $(this);
         s.bind(aui.bind('down',function(e){
+          e=aui.get.touche(e),
           v = $(`<div class="range-hover">${s.val()}</div>`),
           $('body').append(v),
           v.animate({opacity:1}, '.3s'),
           v.offset({left: e.pageX - v.width() / 2, top: s.offset().top - v.height() - 5})
         })).bind(aui.bind('move',function(e){
           v && (
+            e=aui.get.touche(e),
             e.pageX > s.offset().left+5 && e.pageX < s.offset().left + s.width()-5 &&
             v.offset({left: e.pageX - v.width() / 2, top: s.offset().top - v.height() - 5}),
             v.text(s.val())

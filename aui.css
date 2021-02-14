@@ -900,6 +900,7 @@ table td {
   background-color: white;
   height: 100%;
   padding-top: 3.5em;
+  overflow-y: auto;
 }
 
 

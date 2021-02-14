@@ -1,0 +1,233 @@
+<div class="form-m">
+    <div class="form-title">
+        <text>窗体模块介绍</text>
+        <div class="form-btn form-btn-close">➜</div>
+        <div class="form-btn form-btn-more">┅</div>
+
+        <!-- -->
+        <menu for=".form-btn-more">
+            <item name="最小化" func="menu-mini"/>
+        </menu>
+
+    </div>
+    <div class="form-content" style="user-select: text;">
+        <div class="form-item">
+            <div class="form-item-name">
+                打开新窗口
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                var option = {
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;formPath: 'function.html',
+                <br>};
+                <br>var form = new aui.form(option);
+                <br><br>
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>form</td>
+                        <td>JQ对象</td>
+                        <td></td>
+                        <td>窗体对象，也可以直接定义</td>
+                    </tr>
+                    <tr>
+                        <td>formPath</td>
+                        <td>url</td>
+                        <td>*</td>
+                        <td>窗口html文件的路径,如果定义form则此项失效</td>
+                    </tr>
+                    <tr>
+                        <td>clickitem</td>
+                        <td>JQ对象</td>
+                        <td></td>
+                        <td>触发的JQ对象,用于获取图标</td>
+                    </tr>
+                    <tr>
+                        <td>close_func</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>关闭时触发函数</td>
+                    </tr>
+                    <tr>
+                        <td>parent</td>
+                        <td>JQ对象</td>
+                        <td></td>
+                        <td>父级窗口,暂无特殊用途</td>
+                    </tr>
+                    <tr>
+                        <td>useMask</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>使用遮罩层</td>
+                    </tr>
+                    <tr>
+                        <td>maskBlack</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>遮罩层黑色</td>
+                    </tr>
+                    <tr>
+                        <td>maskClose</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>点击遮罩层触发关闭</td>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>任意</td>
+                        <td></td>
+                        <td>用户自定义数据</td>
+                    </tr>
+                    <tr>
+                        <td>icon</td>
+                        <td>url</td>
+                        <td></td>
+                        <td>在底部窗口栏中的图标链接</td>
+                    </tr>
+                    <tr>
+                        <td>mini_icon</td>
+                        <td>url</td>
+                        <td></td>
+                        <td>在图标中额外添加一个小的图标</td>
+                    </tr>
+                    <tr>
+                        <td>ones</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>限制1窗口</td>
+                    </tr>
+                    <tr>
+                        <td>onload</td>
+                        <td>func|array</td>
+                        <td></td>
+                        <td>启动后触发(参数为aui.form类),支持单func或func array</td>
+                    </tr>
+                    <tr>
+                        <td>drag</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>启动拖动</td>
+                    </tr>
+                    <tr>
+                        <td>offset</td>
+                        <td>float</td>
+                        <td>1</td>
+                        <td>居中的Y轴比例, 0.8为80%窗口高度的一半</td>
+                    </tr>
+                    <tr>
+                        <td>anime</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>使用窗口动画</td>
+                    </tr>
+                    <tr>
+                        <td>select</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>美化html的select</td>
+                    </tr>
+                    <tr>
+                        <td>checkbox</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>美化html的checkbox</td>
+                    </tr>
+                    <tr>
+                        <td>range</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>美化html的range</td>
+                    </tr>
+                    <tr>
+                        <td>mobile</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>强制移动模式</td>
+                    </tr>
+                    <tr>
+                        <td>menu</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>初始化menu模块</td>
+                    </tr>
+                    <tr>
+                        <td>tips</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>初始化tips模块</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+            <div class="form-item">
+                <div class="form-item-name">
+                    窗体功能
+                </div>
+                <div class="form-item-text">
+                <table border="1">
+                    <tr>
+                        <td>函数</td>
+                        <td>参数类型</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>form.get(value)</td>
+                        <td>string</td>
+                        <td>获取data中的数据(data必须是object)</td>
+                    </tr>
+                    <tr>
+                        <td>form.find(value)</td>
+                        <td>string</td>
+                        <td>JQ的find,等同于form.form.find()</td>
+                    </tr>
+                    <tr>
+                        <td>form.center(value)</td>
+                        <td>float</td>
+                        <td>窗口居中，等同上方offset</td>
+                    </tr>
+                    <tr>
+                        <td>form.show()</td>
+                        <td></td>
+                        <td>从最小化中显示窗口并置顶</td>
+                    </tr>
+                    <tr>
+                        <td>form.mini()</td>
+                        <td></td>
+                        <td>窗口最小化</td>
+                    </tr>
+                    <tr>
+                        <td>form.top()</td>
+                        <td></td>
+                        <td>窗口置顶</td>
+                    </tr>
+                    <tr>
+                        <td>form.close()</td>
+                        <td></td>
+                        <td>关闭窗口</td>
+                    </tr>
+                    <tr>
+                        <td>form.height()</td>
+                        <td></td>
+                        <td>获取窗口高度</td>
+                    </tr>
+                    <tr>
+                        <td>form.width()</td>
+                        <td></td>
+                        <td>获取窗口宽度</td>
+                    </tr>
+                    <tr>
+                        <td>form.offset()</td>
+                        <td></td>
+                        <td>获取窗口坐标</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>

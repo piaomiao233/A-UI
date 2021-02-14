@@ -1,0 +1,184 @@
+<div class="form-m">
+    <div class="form-title">
+        <text>文件模块介绍</text>
+        <div class="form-btn form-btn-close">➜</div>
+        <div class="form-btn form-btn-more">┅</div>
+
+        <!-- -->
+        <menu for=".form-btn-more">
+            <item name="最小化" func="menu-mini"/>
+        </menu>
+
+    </div>
+    <div class="form-content" style="user-select: text;">
+        <div class="form-item">
+            <div class="form-item-name">
+                选择本地文件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                aui.file.select(func, ones);
+                <br><br>
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>func</td>
+                        <td>function</td>
+                        <td>*</td>
+                        <td>委托函数, 参数为FILE类</td>
+                    </tr>
+                    <tr>
+                        <td>ones</td>
+                        <td>bool</td>
+                        <td>true</td>
+                        <td>选择多个文件，开始时参数为数组</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                读取本地文件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let file;
+                <br>aui.file.select(function(e){
+                <br>&emsp;file = e
+                <br>});
+                <br>let call = function(e){
+                <br>&emsp;console.log(e)
+                <br>};
+                <br>aui.file.read(file, call, type, char);
+                <br><br>
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>file</td>
+                        <td>FILE类</td>
+                        <td>*</td>
+                        <td>从读取文件返回的函数</td>
+                    </tr>
+                    <tr>
+                        <td>call</td>
+                        <td>function</td>
+                        <td>*</td>
+                        <td>委托函数</td>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>string</td>
+                        <td>text</td>
+                        <td>可选参数为text,byte,other。分别对应文本readAsText, 二进制readAsBinaryString, 其他readAsDataURL</td>
+                    </tr>
+                    <tr>
+                        <td>char</td>
+                        <td>string</td>
+                        <td>UTF-8</td>
+                        <td>文件编码, 仅text有效</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                读取本地文件
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let func = function(e){
+                <br>&emsp;console.log(e)
+                <br>}
+                <br>aui.file.readSelect(func, type, ex, msg);
+                <br><br>
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>func</td>
+                        <td>function</td>
+                        <td>*</td>
+                        <td>委托函数, 参数为文件内容</td>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>string</td>
+                        <td>text</td>
+                        <td>文件类型</td>
+                    </tr>
+                    <tr>
+                        <td>ex</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>文件后缀过滤('后缀1,后缀2'), 无视大小写</td>
+                    </tr>
+                    <tr>
+                        <td>msg</td>
+                        <td>string</td>
+                        <td></td>
+                        <td>文件选择异常提示</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                获取路径后缀
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let ex = aui.file.getEx(path);
+                <br>path = 文件路径
+                <br>无后缀返回null
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                获取路径中的文件名
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let file_name = aui.file.getName(path);
+                <br>path = 文件路径
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                文件组过滤
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+                let array = aui.file.excludeEx(arr, ex);
+                <br>对从aui.file.select中获得的文件组进行后缀过滤
+                <br><table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>arr</td>
+                        <td>array</td>
+                        <td>*</td>
+                        <td>文件组</td>
+                    </tr>
+                    <tr>
+                        <td>ex</td>
+                        <td>string</td>
+                        <td>*</td>
+                        <td>后缀字符串("png,jpg,gif")</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,18 @@
-<div class="form-pc" style="width: 40em; height: 30em;">
+<div class="form-m">
     <div class="form-title">
-        <text>A-UI 介绍</text>
-        <div class="form-btns">
-            <div class="form-btn form-btn-close" title="关闭">×</div>
-            <div class="form-btn form-btn-mini" title="最小化">－</div>
-        </div>
+        <text>功能简介</text>
+        <div class="form-btn form-btn-close">➜</div>
+        <div class="form-btn form-btn-more">┅</div>
+
+        <!-- -->
+        <menu for=".form-btn-more">
+            <item name="最小化" func="menu-mini"/>
+        </menu>
+
     </div>
-    <div class="form-content" style="user-select: text; user-select: text; margin-top: 0; padding: 1em;">
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+    <div class="form-content" style="user-select: text;">
+        
+        <div onclick="app_form()">
             <div class="form-item">
                 <div class="form-item-name">
                     窗体类
@@ -17,27 +22,27 @@
                 </div>
             </div>
         </div>
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+        <div onclick="app_message()">
             <div class="form-item">
                 <div class="form-item-name">
                     消息类
                 </div>
                 <div class="form-item-text">
-                    自动消失提示窗，消息框，防移动端顶部提示
+                    自动消失提示窗，消息框，仿移动端顶部提示
                 </div>
             </div>
         </div>
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+        <div onclick="app_html()">
             <div class="form-item">
                 <div class="form-item-name">
                     HTML类
                 </div>
                 <div class="form-item-text">
-                    美化select，checkbox，range组件，图片集组件
+                    美化select、checkbox、range组件, 图片集组件
                 </div>
             </div>
         </div>
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+        <div onclick="app_file()">
             <div class="form-item">
                 <div class="form-item-name">
                     文件类
@@ -47,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+        <div onclick="app_validate()">
             <div class="form-item">
                 <div class="form-item-name">
                     验证类
@@ -57,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="hover-tips-text" data-tips="点击查看详细信息" onclick="app_form()">
+        <div onclick="app_other()">
             <div class="form-item">
                 <div class="form-item-name">
                     其他
@@ -67,6 +72,10 @@
                 </div>
             </div>
         </div>
+
+
+
+
 
 
     </div>

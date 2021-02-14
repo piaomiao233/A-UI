@@ -1,0 +1,86 @@
+<div class="form-m">
+    <div class="form-title">
+        <text>菜单模块</text>
+        <div class="form-btn form-btn-close">➜</div>
+        <div class="form-btn form-btn-more">┅</div>
+
+        <!-- -->
+        <menu for=".form-btn-more">
+            <item name="最小化" func="menu-mini"/>
+        </menu>
+
+    </div>
+    <div class="form-content" style="user-select: text;">
+        <div class="form-item">
+            <div class="form-item-name">
+                普通菜单
+            </div>
+            <div class="form-item-text">
+                <button id="menu-example">演示</button>
+                <br><br>var option = {
+                <br>&emsp;list: [{name:名称, style=样式, func=事件}],
+                <br>&emsp;onclose: function,
+                <br>&emsp;event: mouseEvent,
+                <br>};
+                <br>var form = aui.menu(option);
+                <table border="1">
+                    <tr>
+                        <td>键</td>
+                        <td>类型</td>
+                        <td>默认</td>
+                        <td>注释</td>
+                    </tr>
+                    <tr>
+                        <td>list</td>
+                        <td>array</td>
+                        <td>*</td>
+                        <td>按键组{name:名称, style=样式, func=事件}</td>
+                    </tr>
+                    <tr>
+                        <td>maskBlack</td>
+                        <td>bool</td>
+                        <td>false</td>
+                        <td>遮罩层黑色</td>
+                    </tr>
+                    <tr>
+                        <td>onclose</td>
+                        <td>function</td>
+                        <td></td>
+                        <td>关闭触发</td>
+                    </tr>
+                    <tr>
+                        <td>offset</td>
+                        <td>float</td>
+                        <td></td>
+                        <td>高度参数,如果定义则居中对齐</td>
+                    </tr>
+                    <tr>
+                        <td>event</td>
+                        <td>mouseEvent</td>
+                        <td></td>
+                        <td>鼠标事件, 如果定义则可以跟随鼠标</td>
+                    </tr>
+                    <tr>
+                        <td>data</td>
+                        <td>任意</td>
+                        <td></td>
+                        <td>玩家自定义数据</td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-name">
+                高级菜单
+            </div>
+            <div class="form-item-text" style="text-indent: 0;">
+            
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
