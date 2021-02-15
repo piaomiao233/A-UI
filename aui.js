@@ -113,7 +113,14 @@ $(function(){
       return arr
     },
     isIn: function(val, arr){
-      return arr.indexOf(val) >- 1
+      if(e.is.array(val))
+      for (const i of val) {
+        if(arr.indexOf(i)==-1)
+        return false;
+      }
+      else
+        return arr.indexOf(val) >- 1;
+      return true
     }
   },
   //字符串处理类
@@ -139,7 +146,13 @@ $(function(){
       return e.toUpperCase()
     },
     isIn: function(v, str){
-      return str.indexOf(v)>-1
+      if(e.is.array(v)){
+        for (const i of v)
+          if(str.indexOf(i)>-1)
+            return true;
+      }else
+        return str.indexOf(v)>-1;
+      return false
     },
     pos: function(v, str){
       return str.indexOf(v)
@@ -170,7 +183,7 @@ $(function(){
         maskBlack: true, //黑色遮罩层
       })
    */
-  e.form = class{
+  e.form = class formClass{
     formPath;
     form;
     taskbar;
@@ -238,7 +251,7 @@ $(function(){
         e.form.find(".form-btn-mini").click(function(){
           e.form.addClass("form-close" + e.anime)
         }).bind(down);
-        !aui.is.mobile() && e.drag && aui.dom.drag(e.form,e.form.find(".form-title"),null,false),
+        aui.is.mobile() || e.drag && aui.dom.drag(e.form,e.form.find(".form-title"),null,false),
         !aui.is.undefined(e.offset)&&(aui.is.object(e.offset) ? e.form.offset(e.offset) : (!aui.is.mobile()||e._center) && e.center(e.offset)),
         e.select&&aui.html.select(e.form),
         e.checkbox&&aui.html.checkbox(e.form),
@@ -386,11 +399,10 @@ $(function(){
       return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
     },
     android: function(){
-      let u = navigator.userAgent;
-      return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1
+      return e.string.isIn(['Android', 'Adr'], navigator.userAgent)
     },
-    html5Plus: function(){// 判断runtime是否支持5+ API，分辨是否在app里面打开  
-      return navigator.userAgent.indexOf("Html5Plus") != -1
+    html5Plus: function(){// 判断runtime是否支持5+ API，分辨是否在app里面打开
+      return e.string.isIn('Html5Plus', navigator.userAgent)
     },
     inFrame: function(){ //判断是否在frame中
         return window.frames.length != parent.frames.length
@@ -491,7 +503,7 @@ $(function(){
     dom.inwin : 将窗口置于屏幕内 防止被遮挡
   */
   e.dom = {
-    center: function(dom,offset,back){
+    center: function(dom, offset, back){
       aui.is.jq(dom)||(dom=$(dom)),
       offset = aui.default(offset, 1);
       let x = ($(window).width() - 20 - dom.width()) / 2,
@@ -499,30 +511,30 @@ $(function(){
       back||dom.css({left: x + 'px',top: y + 'px'});
       return {left: x, top: y}
     },
-    drag: function(dom,dragDom,click,top){
-      aui.is.jq(dom)||(dom=$(dom)),
-      dragDom&&(aui.is.jq(dragDom)||(dragDom=$(dragDom))),
-      top=aui.default(top, true);
-      let e = aui, win = $(window), dragTime=0, dragPos = {x:0, y:0},
-      Move=function(event){
+    drag: function(dom, dragDom, click, top){
+      aui.is.jq(dom) || (dom=$(dom)),
+      dragDom && (aui.is.jq(dragDom)||(dragDom=$(dragDom))),
+      top = aui.default(top, true);
+      let win = $(window), dragTime=0, dragPos = {x:0, y:0},
+      Move = function(event){
         if(e.dragDom!=dom){Up();return}
         event=e.get.touche(event);
         let x=event.clientX-dragPos.x, y=event.clientY-dragPos.y, pos=dom.offset();
         x<0 ? pos.left=0 : x+dom.width() > win.width() ? pos.left=win.width()-dom.width() : pos.left=x,
         y<0 ? pos.top=0 : y+dom.height() > win.height() ? pos.top=win.height()-dom.height() : pos.top=y,
         dom.offset(pos)
-      }, Up=function(){
+      }, Up = function(){
         win.unbind(e.bind('move', Move)).unbind(e.bind('up', Up)),
-        typeof click==="function"&&(base.time()-dragTime<200)&&click()
+        e.is.function(click) && (base.time()-dragTime<200) && click()
       }, Down = function(event){
-        e.dragDom=dom,
-        event=e.get.touche(event);
+        e.dragDom = dom,
+        event = e.get.touche(event);
         win.bind(e.bind('move', Move)).bind(e.bind('up', Up)),
-        dragTime=e.time(),
-        dragPos={x:event.clientX-dom.offset().left,y:event.clientY-dom.offset().top},
-        top&&dom.parent().append(dom)
+        dragTime = e.time(),
+        dragPos = {x: event.clientX - dom.offset().left, y: event.clientY - dom.offset().top},
+        top && dom.parent().append(dom)
       };
-      (dragDom||dom).bind(e.bind('down', Down))
+      e.bind('down', Down, dragDom||dom)
     },
     inwin: function(dom){
       aui.is.jq(dom)||(dom=$(dom));
@@ -572,9 +584,9 @@ $(function(){
         return console.log('不是object对象', t), null
     },
     touche: function(t){
-      e.is.mobile()&&(
+      e.is.mobile() && (
         t = t.changedTouches ? t.changedTouches[0] : t.originalEvent.changedTouches[0]
-        );
+      );
       return t
     },
     
@@ -1184,7 +1196,7 @@ $(function(){
         }))
       })
     },
-    img_list: class{
+    img_list: class imgListClass{
       win;
       dom;
       img_name = false;
