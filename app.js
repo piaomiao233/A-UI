@@ -116,11 +116,11 @@ var app_info = function(e){
 
 
 
-$('#app_info').click(function(e){ app_info(e) }),
-$('#app_function_info').click(function(e){ app_function_info(e) }),
-$('#app_form').click(function(e){ app_form(e) }),
-$('#app_message').click(function(e){ app_message(e) }),
-$('#app_html').click(function(e){ app_html(e) }),
-$('#app_file').click(function(e){ app_file(e) }),
-$('#app_validate').click(function(e){ app_validate(e) }),
-$('#app_other').click(function(e){ app_other(e) })
+$('#app_info').click(function(e){ app_info(this) }),
+$('#app_function_info').click(function(e){ app_function_info(this) }),
+$('#app_form').click( function(e){ app_form(this) }),
+$('#app_message').click(function(e){ app_message(this) }),
+$('#app_html').click(function(e){ app_html(this) }),
+$('#app_file').click(function(e){ app_file(this) }),
+$('#app_validate').click(function(e){ app_validate(this) }),
+$('#app_other').click(function(e){ app_other(this) })
