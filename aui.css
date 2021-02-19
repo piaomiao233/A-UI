@@ -169,6 +169,7 @@ menu{ display: none;}
   .tips-top, .loding-top{
     font-size: 1.2em;
     background-color: rgba(0,0,0,.85);
+    max-width: 80%;
   }
 
   .push-box .push-text{
@@ -535,7 +536,7 @@ button:active{
   padding: .5em .7em;
   font-weight: 500;
   letter-spacing: .1em;
-  max-width: 40%;
+  max-width: 20em;
   word-wrap: break-word;
   word-break: normal;
   pointer-events: none;

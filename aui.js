@@ -39,6 +39,10 @@ $(function(){
     s = parseInt(t.width() / c);
     t.width(s * c)
   },
+  /*  监听message
+      未完成
+
+  */
   e.post_message = {
     init: function(){
       addEventListener('message', function(e){
@@ -49,16 +53,18 @@ $(function(){
       this.list[key] = func
     },
     remove: function(key, func){
-      
       this.list.splice(i,1)
-
     },
-
     receive: function(t){
+
+
 
     },
     list: {},
   },
+  /* 定时器组件
+  
+  */
   e.timer = {
     start: function(){
       e.timer.timer_id || (e.timer.timer_id = setInterval(e.timer.loop, 1000))
