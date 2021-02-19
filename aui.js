@@ -475,10 +475,11 @@ $(function(){
     jQuery: function(t){
       return this.jq(t)
     }
-  },
-  /* 动态引入js或css
-      src = 路径
-      onload = 引入后调用
+  },  
+  /* 绑定事件
+      type = 类型 (down, up, move, click)
+      func = 事件
+      dom = JQ元素
   */
   e.bind = function(type, func, dom){
     type = e.string.low(type);
@@ -494,6 +495,10 @@ $(function(){
     dom&&dom.bind(t);
     return t
   },
+  /* 动态引入js或css
+      src = 路径
+      onload = 引入后调用
+  */
   e.include = function(src, onload = null){
     if(this.is.include(src)){
       onload();
