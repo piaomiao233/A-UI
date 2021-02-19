@@ -61,11 +61,26 @@ var app_info = function(e){
         formPath: 'message.html',
         clickitem: e&&$(e),
         onload: function(win){
+            win.find('#tips-example').click(function(){
+                aui.tips('这是自动消失提示信息')
+            }),
+            win.find('#message-example').click(function(){
+                aui.message('这是弹窗信息', {
+                    name1: '确定',
+                    func1: function(){
+                        aui.tips('您点击了确定')
+                    },
+                    name2: '关闭',
+                    func2: function(){
+                        aui.tips('您点击了关闭')
+                    }
+                })
+            }),
             win.find('#push-example1').click(function(){
                 new aui.push({
                     msg: '这是推送的信息',
                 })
-            })
+            }),
             win.find('#push-example2').click(function(){
                 new aui.push({
                     msg: '推送信息在5秒后自动关闭',

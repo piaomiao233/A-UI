@@ -11,7 +11,7 @@
     <div class="bgLayer"></div>
     <div class="middleLayer">
         <div class="app-box">
-            <div class="apps">
+            <div class="apps" id="app-item-box">
                 <div class="app-item" id="app_info"><img src="imgs/app/user.png"><text>A-UI简介</text></div>
                 <div class="app-item" id="app_function_info"><img src="imgs/app/task.png"><text>功能简介</text></div>
                 <div class="app-item" id="app_form"><img src="imgs/app/task.png"><text>窗体类</text></div>
@@ -45,7 +45,7 @@
           'imgs/bg/5.jpg',
         ],10000)
 
-        
+        aui.app_item_init()
 
         //屏蔽鼠标右键
         //$(document).bind("contextmenu",function(e){return false;});

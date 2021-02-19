@@ -170,6 +170,11 @@ menu{ display: none;}
     font-size: 1.2em;
     background-color: rgba(0,0,0,.85);
   }
+
+  .push-box .push-text{
+    font-size: 1.2em;
+    line-height: 3.5em;
+  }
   
   #taskbarbox{
     border-radius: unset !important;
@@ -908,6 +913,7 @@ table td {
   position: absolute;
   width: 100%;
   top: 0;
+  z-index: 999;
 }
 @keyframes push-item-open-anime{from {transform: translate(0, 3em);opacity:0;}to { transform: translate(0, 0);opacity:1;}}
 
@@ -940,13 +946,14 @@ table td {
   letter-spacing: .1em;
   text-shadow: 1px 1px rgba(255,255,255,.3);
   width: 70%;
-  margin-left: 1em;
   float: left;
   line-height: 2.5em;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
+
+
 .push-box .push-item .push-close{
   float: right;
   color: white;

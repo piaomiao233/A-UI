@@ -33,6 +33,12 @@ $(function(){
       del = 删除定时
           func = 方法
   */
+  e.app_item_init = function(){
+    let t = $('#app-item-box'),
+    c = t.children(0).width(),
+    s = parseInt(t.width() / c);
+    t.width(s * c)
+  },
   e.post_message = {
     init: function(){
       addEventListener('message', function(e){
@@ -434,7 +440,7 @@ $(function(){
       return this.number(e)
     },
     number: function(e){
-      return !isNaN(e)
+      return !this.undefined(e) && e !== null && !isNaN(e)
     },
     include: function(e){ //检测文件是否被引入
       let j = /js$/i.test(e);
@@ -859,7 +865,7 @@ $(function(){
       offset: aui.is.mobile() ? 0.9 : 0.8,
       onload: onload
     };
-    form ? e.is.jq(form) ? param.form = form : param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
+    form ? aui.is.jq(form) ? param.form = form : param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
     let v = new aui.form(param),
         e = v.find('div');
     for (const i of items) {
@@ -1348,7 +1354,8 @@ $(function(){
   */
   e.message = function(msg, param){
     param = aui.default(param, {});
-    let dom = `<div class="msg-top"><text>${msg}</text><div class="msg-top-btns"><div class="msg-top-btn-left">`, bind = function(e){
+    let dom = `<div class="msg-top"><text>${msg}</text><div class="msg-top-btns"><div class="msg-top-btn-left">`, 
+    bind = function(e){
       e.form.find('.msg-top-btn-left').click(function(){
         param.func1&&param.func1(), e.close()
       }),
@@ -1359,12 +1366,13 @@ $(function(){
     dom += (param.name1 || '确定') + '</div>',
     param.func2 && (dom += '<div class="msg-top-btn-right">' + (param.name2 || '取消')) + '</div>',
     dom += '</div></div>';
-    new aui.from({
+    new aui.form({
       form: $(dom),
       onload: bind,
       drag: false,
       useMask: true,
       maskClose : param.close,
+      _center: true,
       offset: 0.8,
     })
   },
