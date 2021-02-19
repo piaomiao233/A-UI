@@ -12,14 +12,14 @@
     <div class="middleLayer">
         <div class="app-box">
             <div class="apps">
-                <div class="app-item" onclick="app_info(this)"><img src="imgs/app/user.png"><text>A-UI简介</text></div>
-                <div class="app-item" onclick="app_function_info(this)"><img src="imgs/app/task.png"><text>功能简介</text></div>
-                <div class="app-item" onclick="app_form(this)"><img src="imgs/app/task.png"><text>窗体类</text></div>
-                <div class="app-item" onclick="app_message(this)"><img src="imgs/app/task.png"><text>消息类</text></div>
-                <div class="app-item" onclick="app_html(this)"><img src="imgs/app/task.png"><text>HTML类</text></div>
-                <div class="app-item" onclick="app_file(this)"><img src="imgs/app/task.png"><text>文件类</text></div>
-                <div class="app-item" onclick="app_validate(this)"><img src="imgs/app/task.png"><text>验证类</text></div>
-                <div class="app-item" onclick="app_other(this)"><img src="imgs/app/task.png"><text>其他</text></div>
+                <div class="app-item" id="app_info"><img src="imgs/app/user.png"><text>A-UI简介</text></div>
+                <div class="app-item" id="app_function_info"><img src="imgs/app/task.png"><text>功能简介</text></div>
+                <div class="app-item" id="app_form"><img src="imgs/app/task.png"><text>窗体类</text></div>
+                <div class="app-item" id="app_message"><img src="imgs/app/task.png"><text>消息类</text></div>
+                <div class="app-item" id="app_html"><img src="imgs/app/task.png"><text>HTML类</text></div>
+                <div class="app-item" id="app_file"><img src="imgs/app/task.png"><text>文件类</text></div>
+                <div class="app-item" id="app_validate"><img src="imgs/app/task.png"><text>验证类</text></div>
+                <div class="app-item" id="app_other"><img src="imgs/app/task.png"><text>其他</text></div>
             </div>
         </div>
         <div class="taskbar-box">   
@@ -45,6 +45,7 @@
           'imgs/bg/5.jpg',
         ],10000)
 
+        
 
         //屏蔽鼠标右键
         //$(document).bind("contextmenu",function(e){return false;});

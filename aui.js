@@ -183,40 +183,42 @@ $(function(){
         maskBlack: true, //黑色遮罩层
       })
    */
-  e.form = class formClass{
-    formPath;
-    form;
-    taskbar;
-    clickitem;
-    mask;
-    onclose;
-    parent;
-    maskBlack = true;
-    useMask = false;
-    maskClose = false;
-
-    data = {};
-    _data = {};
-    icon;
-    mini_icon;
-    ones = true;
-    onload;
-    drag = true;
-    offset = 1;
-    isTop = false;
-    anime = true;
-    _center = false;
-    //-----以下为html组件绑定------
-    select = true;
-    checkbox = true;
-    tips = true;
-    range = true;
-    mobile = false;
-    menu = true;
-
+  e.form = class {
+    init(){
+      this.formPath = null;
+      this.form = null;
+      this.taskbar = null;
+      this.clickitem = null;
+      this.mask = null;
+      this.onclose = null;
+      this.parent = null;
+      this.maskBlack = true;
+      this.useMask = false;
+      this.maskClose = false;
+  
+      this.data = {};
+      this._data = {};
+      this.icon = null;
+      this.mini_icon = null;
+      this.ones = true;
+      this.onload = null;
+      this.drag = true;
+      this.offset = 1;
+      this.isTop = false;
+      this.anime = true;
+      this._center = false;
+      //-----以下为html组件绑定------
+      this.select = true;
+      this.checkbox = true;
+      this.tips = true;
+      this.range = true;
+      this.mobile = false;
+      this.menu = true;
+    }
 
     //-----以上为html组件绑定------
     constructor(param){
+      this.init(this);
       if(aui.is.object(param))
         for (const key in param)
           this.hasOwnProperty(key) && (this[key] = param[key]);
@@ -825,7 +827,7 @@ $(function(){
       })
     },
     webview: function(param){
-      new aui.form({
+      new e.form({
         formPath: 'webview.html',
         data: param.data,
         onclose: param.onclose,
@@ -859,7 +861,7 @@ $(function(){
     };
     form ? e.is.jq(form) ? param.form = form : param.formPath = formPath : param.form = $('<div class="app-drawer"><div class="items"></div></div>');
     let v = new aui.form(param),
-        e = v.form.find('div');
+        e = v.find('div');
     for (const i of items) {
       let dom = $(`<div class="app-item"><img src="${i.icon}"><text>${i.name}</text></div>`);
       i.func&&(typeof i.func == 'function' ? dom.click(function(){i.func(i)}) : dom.attr("onclick", i.func)),
@@ -1196,23 +1198,27 @@ $(function(){
         }))
       })
     },
-    img_list: class imgListClass{
-      win;
-      dom;
-      img_name = false;
+    img_list: class {
 
-      _imgs = [];
-      add_btn;
-      _item_new = 'img-list-item-new';
-      _item = 'img-list-item';
-      _click = 'img-list-item-click';
-      jq_item_new = ':not(.img-list-item-new)';
-      _input_name = '<input type="text" class="hover-tips-input" data-tips="该图片在json中的文件名">';
-      ex = 'png,jpg';
-      menu = [];
-      onload;
+      init(){
+        this.win = null;
+        this.dom = null;
+        this.img_name = false;
+  
+        this._imgs = [];
+        this.add_btn = null;
+        this._item_new = 'img-list-item-new';
+        this._item = 'img-list-item';
+        this._click = 'img-list-item-click';
+        this.jq_item_new = ':not(.img-list-item-new)';
+        this._input_name = '<input type="text" class="hover-tips-input" data-tips="该图片在json中的文件名">';
+        this.ex = 'png,jpg';
+        this.menu = [];
+        this.onload = null;
+      }
 
       constructor(dom, param){
+        this.init();
         let e = this;
         this.dom = dom;
         if(aui.is.object(param))
@@ -1374,16 +1380,20 @@ $(function(){
       }
   */
   e.push = class{
-    data;
-    icon;
-    closeTime;
-    onclick;
-    onclose;
-    onload;
-    clickClose = true;
-    form = $(`<div class="push-item"><div class="push-img"></div><div class="push-text"></div><div class="push-close">×</div></div>`);
-    msg;
+    init(){
+      this.data = null;
+      this.icon = null;
+      this.closeTime = null;
+      this.onclick = null;
+      this.onclose = null;
+      this.onload = null;
+      this.clickClose = true;
+      this.form = $(`<div class="push-item"><div class="push-img"></div><div class="push-text"></div><div class="push-close">×</div></div>`);
+      this.msg = null;
+    }
+    
     constructor(param){
+      this.init();
       let t = this;
       if(!param.msg) return;
       if(aui.is.object(param))

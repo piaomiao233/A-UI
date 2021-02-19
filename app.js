@@ -7,6 +7,14 @@ var app_info = function(e){
     new aui.form({
         formPath: 'function.html',
         clickitem: e&&$(e),
+        onload: function(win){
+            win.find('#app_func_form').click(function(e){ app_info() }),
+            win.find('#app_func_message').click(function(e){ app_message() }),
+            win.find('#app_func_html').click(function(e){ app_html() }),
+            win.find('#app_func_file').click(function(e){ app_file() }),
+            win.find('#app_func_validate').click(function(e){ app_validate() }),
+            win.find('#app_func_other').click(function(e){ app_other() })
+        }
     })
 }, app_form = function(e){
     aui.drawer([
@@ -105,3 +113,14 @@ var app_info = function(e){
         clickitem: e&&$(e),
     })
 }
+
+
+
+$('#app_info').click(function(e){ app_info(e) }),
+$('#app_function_info').click(function(e){ app_function_info(e) }),
+$('#app_form').click(function(e){ app_form(e) }),
+$('#app_message').click(function(e){ app_message(e) }),
+$('#app_html').click(function(e){ app_html(e) }),
+$('#app_file').click(function(e){ app_file(e) }),
+$('#app_validate').click(function(e){ app_validate(e) }),
+$('#app_other').click(function(e){ app_other(e) })
