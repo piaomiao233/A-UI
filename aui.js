@@ -1364,7 +1364,7 @@ $(function(){
     let dom = `<div class="msg-top"><text>${msg}</text><div class="msg-top-btns"><div class="msg-top-btn-left">`, 
     bind = function(e){
       e.form.find('.msg-top-btn-left').click(function(){
-        param.func1&&param.func1(), e.close()
+        aui.default(param.func1&&param.func1(),true)&&e.close()
       }),
       param.func2 ? e.form.find('.msg-top-btn-right').click(function(){
         aui.is.func(param.func2)&&param.func2(), e.close()
@@ -1373,7 +1373,7 @@ $(function(){
     dom += (param.name1 || '确定') + '</div>',
     param.func2 && (dom += '<div class="msg-top-btn-right">' + (param.name2 || '取消')) + '</div>',
     dom += '</div></div>';
-    new aui.form({
+    return new aui.form({
       form: $(dom),
       onload: bind,
       drag: false,
@@ -1383,6 +1383,22 @@ $(function(){
       offset: 0.8,
     })
   },
+  e.input_box = function(msg, param){
+    param.close=e.default(param.close,false);
+    param.func2=e.default(param.func2,true);
+    param.type=e.default(param.type,'text');
+    let s = '', func = param.func1;
+    param.func1 = function(){
+      return func&&func(s)
+    };
+    let win = e.message(msg, param),
+    input = $(`<input type="${param.type}" id="input_box" placeholder="${param.tips||''}" style="width: 80%;margin-top: 1em;">`);
+    win.find('text').after(input), input.change(function(){
+      s=$(this).val()
+    });
+    return win
+  }
+
   /* 消息推送, 模仿移动端
       param = {
         icon = 图标
