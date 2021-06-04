@@ -21,23 +21,11 @@ $(function(){
       i>-1&&this.splice(i, 1)
     };
     */
+    e.app_item_init()
   },
-  /* 定时器组件  使用 aui.timer.init() 启动
-      start = 启动定时器 每秒检测1次
-      stop = 停止计时器
-          clear = 是否清空
-      add = 添加定时
-          func = 方法
-          loop = 间隔时间, 如果为假那么为单次事件
-          next = 下次执行时间(为-1时默认是下一个loop的时间, 大于等于0时为当前时间加next的值)
-      del = 删除定时
-          func = 方法
-  */
   e.app_item_init = function(){
-    let t = $('#app-item-box'),
-    c = t.children(0).width(),
-    s = parseInt(t.width() / c);
-    t.width(s * c)
+    let t = $('#app-item-box');
+    t&&(c = t.children(0).width(), s = parseInt(t.width() / c), t.width(s * c))
   },
   /*  监听message
       未完成
@@ -57,13 +45,20 @@ $(function(){
     },
     receive: function(t){
 
-
-
     },
     list: {},
   },
-  /* 定时器组件
-  
+
+  /* 定时器组件  使用 aui.timer.init() 启动
+      start = 启动定时器 每秒检测1次
+      stop = 停止计时器
+          clear = 是否清空
+      add = 添加定时
+          func = 方法
+          loop = 间隔时间, 如果为假那么为单次事件
+          next = 下次执行时间(为-1时默认是下一个loop的时间, 大于等于0时为当前时间加next的值)
+      del = 删除定时
+          func = 方法
   */
   e.timer = {
     start: function(){
@@ -811,7 +806,7 @@ $(function(){
       })
     },
     post: function(url, data, succ, error, time, pro){
-      $.ajax({
+      let s = {
         url: url,
         async: true,
         type: 'POST',
@@ -819,19 +814,20 @@ $(function(){
         timeout: time || 1000,
         success: succ,
         error: error,
-        xhr: function(){if(pro){
-          let xhr = $.ajaxSettings.xhr();
-          if(pro && xhr.upload){
-            xhr.upload.addEventListener('progress',function(e){
-              if (e.lengthComputable) {
-                let p = e.loaded / e.total;
-                console.info("progress: "+Math.round(p * 100)+"%");
-              }
-            }, false);
-          }
-          return xhr
-        }}
-      })
+      };
+      pro&&(s.xhr=function(){if(pro){
+        let xhr = $.ajaxSettings.xhr();
+        if(xhr.upload){
+          xhr.upload.addEventListener('progress',function(e){
+            if (e.lengthComputable) {
+              let p = e.loaded / e.total;
+              pro(p), console.info("progress: "+Math.round(p * 100)+"%");
+            }
+          }, false);
+        }
+        return xhr
+      }});
+      $.ajax(s)
     },
     json: function(url, succ, error, t){
       $.ajax({
@@ -1157,8 +1153,8 @@ $(function(){
         let v = $('<label class="checkbox-label"><span class="checkbox-circle"></span><span class="checkbox-on">ON</span><span class="checkbox-off">OFF</span></label>'),
         active = 'checkbox-label-active',
         e = $(this), b;
-        e.hide().after(v),
         v.attr('style',e.attr('style')),
+        e.hide().after(v),
         e.prop('checked') && v.addClass(active),
         v.click(function(){
           e.prop('checked', b = !e.prop('checked')),
@@ -1454,6 +1450,5 @@ $(function(){
     }
   }
 
-
-  return aui.onload(), aui
+  return e.onload(), e
 });
