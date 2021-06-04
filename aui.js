@@ -1173,13 +1173,13 @@ $(function(){
         });
       let v;
       form.find('[class^=hover-tips]').hover( function(e){
-        v || ($(this).attr('data-tips') && (
+        v || ($(this).attr('data-tips') && ((
           v = $('<div class="hover-tips-box"></div>'),
           $('body').append(v),
           v.animate({opacity:1}, '.3s')
         ),
         v.text((showVal&&$(this).val())||$(this).attr('data-tips')),
-        v.offset({left: e.pageX, top: e.pageY+10}))
+        v.offset({left: e.pageX, top: e.pageY+10})))
       }, function(e){
         v && v.animate({opacity:0},'.3s',function(){
           v.remove(), v = null
