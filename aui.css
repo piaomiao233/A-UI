@@ -815,6 +815,9 @@ table td {
 .hover-tips-text{
   text-decoration: underline
 }
+.hover-tips-hand:hover{
+  cursor: pointer;
+}
 
 .range-hover{
   position: absolute;
