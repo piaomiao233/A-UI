@@ -1158,7 +1158,7 @@ $(function(){
         active = 'checkbox-label-active',
         e = $(this), b;
         e.hide().after(v),
-        v.css(e.attr('style')),
+        v.attr('style',e.attr('style')),
         e.prop('checked') && v.addClass(active),
         v.click(function(){
           e.prop('checked', b = !e.prop('checked')),
