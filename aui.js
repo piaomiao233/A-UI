@@ -75,7 +75,7 @@ $(function(){
       let time = e.time(), l = e.timer.timer_list;
       for (let i=l.length-1; i>=0; i--) {
         let v = l[i];
-        v.next>=time && (v.func(), v.loop ? v.next = time + v.loop:this.del(v))
+        v.next<=time && (v.func(), v.loop ? v.next = time + v.loop:this.del(v))
       }
     },
     add: function(func, loop, next){
