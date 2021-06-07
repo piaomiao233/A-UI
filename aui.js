@@ -1,12 +1,12 @@
 /*
-  A-UI是一款基于JQuery的前端框架，整体风格模仿MacOS。
+  A-UI是一款基于JQuery的前端框架。
   框架采用单页面，多内窗风格思路。
   框架由本人业余开发，不保证更新频率。
   制作by 飘渺
 
   QQ：283598506
   微信：13014772278
-  承接JS+CSS+PHP开发
+  承接JS+CSS+PHP+Nodejs开发
   演示: http://www.aliong.com
   github: https://github.com/piaomiao233/A-UI
 
@@ -75,7 +75,7 @@ $(function(){
       let time = e.time(), l = e.timer.timer_list;
       for (let i=l.length-1; i>=0; i--) {
         let v = l[i];
-        v.next<=time && (v.func(), v.loop ? v.next = time + v.loop:this.del(v))
+        v.next<=time && ( v.func(), v.loop ? v.next = time + v.loop:this.del(v))
       }
     },
     add: function(func, loop, next){
@@ -253,7 +253,7 @@ $(function(){
           })
         ),
         e.top(),
-        e.clickitem&&e.addTaskbar(),
+        (e.clickitem || e.icon)&&e.addTaskbar(),
         e.form.find(".form-btn-close").click(function(){
           e.close()
         }).bind(down),
@@ -302,9 +302,10 @@ $(function(){
     }
     //添加状态栏图标
     addTaskbar(){
-      let e = this, clone, s = e.taskbar = $('<div class="taskbar-app"></div>');
+      let e = this, s = e.taskbar = $('<div class="taskbar-app"></div>');
       $("#taskbarbox").append(s),
-      s.append(this.clickitem.find('img').clone()),
+      this.clickitem?s.append(this.clickitem.find('img').clone()):
+      this.icon&&s.append($(`<img src="${this.icon}">`)),
       e.mini_icon&&s.append($(`<img class="mini-icon" src="${e.mini_icon}">`)),
       e.icon&&s.find('img').attr('src', e.icon),
       s.click(function(){
